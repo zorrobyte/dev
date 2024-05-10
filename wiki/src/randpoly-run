@@ -10,14 +10,13 @@
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 #
 
-export D=11
-export M=1000
+export D=32
+export M=500
 
 if [[ "$1" != "" ]] ; then
   export D="$1"
 fi
 
-gcc -O3 littlewoodp.c -o littlewoodp
-#./littlewoodp $D | xargs -n1 -I{} mpsolve -p '{}' | tr -d '(),' | sort -u > lwp-d$D.gp
-./littlewoodp $D $M | xargs -n1 -I{} mpsolve -p '{}' | tr -d '(),' > lwp-d$D.gp
-cat lwp-d$D.gp | ./clog.py > ln_lwp-d$D.gp
+gcc -O3 randpoly.c -o randpoly
+./randpoly $D $M | xargs -n1 -I{} mpsolve -p '{}' | tr -d '(),' > rp-d$D.gp
+cat rp-d$D.gp | ./clog.py > ln_rp-d$D.gp
