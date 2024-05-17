@@ -11,13 +11,13 @@ Note that this is a necessary but insufficient condition for convergence.
 
 |   |   |   |   |
 |---|---|---|---|
-| Absolute Convergence | If $\sum |u_n|$ converges and $\sum u_n$ converges |
-| Conditional Convergence | If $\sum |u_n|$ diverges but $\sum u_n$ converges |
+| Absolute Convergence | If $\sum \|u_n\|$ converges and $\sum u_n$ converges |
+| Conditional Convergence | If $\sum \|u_n\|$ diverges but $\sum u_n$ converges |
 
 |   |   |   |   |
 |---|---|---|---|
 | Integral Test | 
-| Conditional Convergence | If $\sum |u_n|$ diverges but $\sum u_n$ converges |
+| Conditional Convergence | If $\sum \|u_n\|$ diverges but $\sum u_n$ converges |
 
 
 
