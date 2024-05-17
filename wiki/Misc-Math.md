@@ -21,7 +21,7 @@ f(x) = \omega(g(x)) \iff \liminf_{x \to \infty} \frac{f(x)}{g(x)} = \infty
 $$
 
 $$
-f(x) = \Theta(g(x)) \iff f(x) = O(g(x)) \ \& \ f(x) = \Omega(g(x))
+f(x) = \Theta(g(x)) \iff f(x) = O(g(x)) \ \land \ f(x) = \Omega(g(x))
 $$
 
 ---
