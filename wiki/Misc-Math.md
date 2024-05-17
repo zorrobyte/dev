@@ -45,20 +45,20 @@ With the usual convention that $0!=1$.
 $$
 \begin{array}{lcl}
  & e & = \frac{p}{v} \\\\
- & & = \sum_{k=0}^{v} \frac{1}{k!} + \sum_{k=v+1}^{\infty} \frac{1}{k!} \\\\
+ & & = { \sum } ^ v _ {k=0} \frac{1}{k!} + { \sum } _ {k=v+1} ^ {\infty} \frac{1}{k!} \\\\
 \to & (v!) e  & = (v-1)! p \\\\
- & & = \sum_{k=0}^{v} \frac{v!}{k!} + ( \frac{1}{v+1} + \frac{1}{(v+1)(v+2)} + \cdots )
+ & & = { \sum} _ {k=0} ^ {v} \frac{v!}{k!} + ( \frac{1}{v+1} + \frac{1}{(v+1)(v+2)} + \cdots )
 \end{array}
 $$
 
 By assumption, $(v!) e = (v-1)! p \in \mathbb{Z}$.
-We also have the first sum $\sum_{k=0}^{v} \frac{v!}{k!} \in \mathbb{Z}$.
+We also have the first sum ${\sum}_{k=0}^{v} \frac{v!}{k!} \in \mathbb{Z}$.
 
 The second sum is greater than 0 and we can get bounds:
 
 $$
 \begin{array}{lrcl}
- &  0 & < \frac{1}{v+1} + \frac{1}{(v+1)(v+2)} + \cdots & \le \frac{1}{v+1} \sum_{k=0}^{\infty} \frac{1}{(v+1)^k} \\\\
+ &  0 & < \frac{1}{v+1} + \frac{1}{(v+1)(v+2)} + \cdots & \le \frac{1}{v+1} {\sum}_{k=0}^{\infty} \frac{1}{(v+1)^k} \\\\
 \to & 0 & < \frac{1}{v+1} + \frac{1}{(v+1)(v+2)} + \cdots & \le \frac{1}{v}
 \end{array}
 $$
@@ -77,16 +77,16 @@ Balls and urns counting (from [src](https://www.johndcook.com//TwelvefoldWay.pdf
 |-------|------|--------------|--------|--------|
 | `l`   | `l`  | $u^b$                            | $(u)_b$ | $u! { b \brace u }$ |
 | `u`   | `l`  | $\left({u \choose b }\right)$    | $u \choose b$ | $\left({u \choose b-u }\right)$ |
-| `l`   | `u`  | $\sum_{i=0}^u {  b \brace i }$   | $[ b \le u ]$ | ${  b \brace u }$ |
-| `u`   | `u`  | $\sum_{i=1}^u p_i(b) $           | $[ b \le u ]$ | $p_u(b)$ |
+| `l`   | `u`  | ${\sum}_{i=0}^u {  b \brace i }$   | $[ b \le u ]$ | ${  b \brace u }$ |
+| `u`   | `u`  | ${\sum}_{i=1}^u p_i(b) $           | $[ b \le u ]$ | $p_u(b)$ |
 
 * `l` = labelled
 * `u` = unlabelled
-* $ (u)\_b = \prod_{k=0}^{b-1} (u-k) $
+* $(u)\_b = {\prod}_{k=0}^{b-1} (u-k)$
 * ${ b \brace u}$ - Stirling's number of the second kind (${ n \brace k } = S(n,k) = k S(n-1,k) + S(n-1,k-1)$)
-* $ \left({u \choose b }\right) = { n - (k-1) \choose k }$, "with replacement"
-* $ [ b \le u ]$ = indicator function
-* $ p_k(n) = p_{k-1}(n-1) + p_k(n-k) $, number of ways to partition $n$ into $k$ parts ($n$ as sum of $k$ integers)
+* $\left({u \choose b }\right) = { n - (k-1) \choose k }$, "with replacement"
+* $[ b \le u ]$ = indicator function
+* $p_k(n) = p_{k-1}(n-1) + p_k(n-k)$, number of ways to partition $n$ into $k$ parts ($n$ as sum of $k$ integers)
 
 #### `ll*`
 
