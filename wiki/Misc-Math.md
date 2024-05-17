@@ -82,9 +82,13 @@ Balls and urns counting (from [src](https://www.johndcook.com//TwelvefoldWay.pdf
 
 * `l` = labelled
 * `u` = unlabelled
+* $b$ - balls
+* $u$ - urns
+* `max(1)` - chance maximum balls in urns does not exceed 1
+* `min(1)` - chance all urns have at least 1 ball
 * $(u)\_b = {\prod}_{k=0}^{b-1} (u-k)$
-* ${ b \brace u}$ - Stirling's number of the second kind (${ n \brace k } = S(n,k) = k S(n-1,k) + S(n-1,k-1)$)
-* $\left({u \choose b }\right) = { n - (k-1) \choose k }$, "with replacement"
+* ${ b \brace u}$ - Stirling's number of the second kind ( ${ n \brace k } = S(n,k) = k S(n-1,k) + S(n-1,k-1)$ )
+* $\left({u \choose b }\right) = { u + b - 1 \choose b }$, "with replacement"
 * $[ b \le u ]$ = indicator function
 * $p_k(n) = p_{k-1}(n-1) + p_k(n-k)$, number of ways to partition $n$ into $k$ parts ($n$ as sum of $k$ integers)
 
