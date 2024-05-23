@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -54,17 +54,17 @@
         <h1 id="ssh-recipes">SSH Recipes</h1>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Command</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>ssh -L local:local.host:remote remote.host</code></td>
 <td>Tunnel port <code>local</code> on <code>local.host</code> to <code>remote</code> port on <code>remote.host</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>ssh -R remote:local.host:local remote.host</code></td>
 <td>Tunnel port <code>remote</code> on <code>remote.host</code> to <code>local</code> port on <code>local.host</code></td>
 </tr>
@@ -72,17 +72,17 @@
 </table>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Example</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>ssh -L 8080:localhost:80 user@remote.host</code></td>
 <td>Send port <code>8080</code> connections on <code>localhost</code> to port <code>80</code> on <code>remote.host</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>ssh -R 2222:localhost:22 user@remote.host</code></td>
 <td>Send port <code>2222</code> connections on <code>remote.host</code> to port <code>22</code> locally (ssh redirection from remote to local)</td>
 </tr>
@@ -91,13 +91,13 @@
 <hr />
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Command</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>ssh -i key -D local -f -C -q -N user@remote.host</code></td>
 <td>Open an ssh tunnel with SOCKSv5 proxy enabled (<code>-D</code> socks, <code>-f</code> fork, <code>-C</code> compress, <code>-q</code> quiet, <code>-N</code> no command)</td>
 </tr>
@@ -105,21 +105,21 @@
 </table>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Example</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>ssh -i ~/.ssh/priv.key -D 8080 -f -C -q -N user@remote.host</code></td>
 <td>Send localhost port <code>8080</code> out through <code>remote.host</code></td>
 </tr>
 </tbody>
 </table>
-<p>Browser should have a <code>Configure Proxy Access</code> somewhere which should be set to <code>SOCKS v5</code>, <code>localhost</code>/<code>127.0.0.1</code> as host
-and the appropriate port (<code>8080</code>).</p>
+<p>Browser should have a <code>Configure Proxy Access</code> somewhere which should be set to <code>SOCKS v5</code>, <code>localhost</code>/<code>127.0.0.1</code> as host and the appropriate port (<code>8080</code>).</p>
 <h6 id="2019-09-24">2019-09-24</h6>
+
 
       </section>
 
@@ -130,6 +130,6 @@ and the appropriate port (<code>8080</code>).</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

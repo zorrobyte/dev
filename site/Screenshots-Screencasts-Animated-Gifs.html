@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -53,58 +53,46 @@
 
         <h2 id="screencasts">Screencasts</h2>
 <p>I've found <code>kazam</code> to work very well.</p>
-<pre><code class="language-bash">$ sudo apt-get install kazam
-$ kazam
-</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>$ <span class="fu">sudo</span> apt-get install kazam</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>$ <span class="ex">kazam</span></span></code></pre></div>
 <h2 id="screenshots">Screenshots</h2>
 <h3 id="gimp">Gimp</h3>
 <p><code>File-&gt;Create-&gt;Screenshot</code></p>
 <h3 id="imagemagick">ImageMagick</h3>
-<pre><code class="language-bash">$ import -window root screenshot.png
-</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>$ <span class="ex">import</span> -window root screenshot.png</span></code></pre></div>
 <h2 id="animated-gifs">Animated Gifs</h2>
-<h3 id="imagemagick_1">ImageMagick</h3>
-<pre><code class="language-bash">$ convert -delay 1 -layers optimize inp*.png anim.gif
-</code></pre>
+<h3 id="imagemagick-1">ImageMagick</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>$ <span class="ex">convert</span> -delay 1 -layers optimize inp*.png anim.gif</span></code></pre></div>
 <h2 id="quick-and-dirty-way-to-create-animated-gifs-from-a-window">Quick and dirty way to create animated Gifs from a window</h2>
-<pre><code class="language-bash">$ winid=`xwininfo | grep -o 'Window id: [^ ]* ' | cut -f3 -d' '` ; echo $winid
-</code></pre>
-<p>Click on the window in question and make sure the portion of the
-window you want to record is exposed.</p>
-<pre><code class="language-bash">$ for x in {1..10}
-do
-  import  -window $winid out$x.png
-  sleep 0.1
-done
-</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>$ <span class="va">winid=</span><span class="kw">`</span><span class="ex">xwininfo</span> <span class="kw">|</span> <span class="fu">grep</span> -o <span class="st">&#39;Window id: [^ ]* &#39;</span> <span class="kw">|</span> <span class="fu">cut</span> -f3 -d<span class="st">&#39; &#39;</span><span class="kw">`</span> ; <span class="bu">echo</span> <span class="va">$winid</span></span></code></pre></div>
+<p>Click on the window in question and make sure the portion of the window you want to record is exposed.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>$ <span class="kw">for</span> <span class="ex">x</span> in <span class="dt">{1..10}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">do</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>  <span class="ex">import</span>  -window <span class="va">$winid</span> out<span class="va">$x</span>.png</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  <span class="fu">sleep</span> 0.1</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="kw">done</span></span></code></pre></div>
 <p>Once the <code>out{1..10}.png</code> files are created, coalesce them into an animated Gif:</p>
-<pre><code class="language-bash">$ convert -delay 1 -layers optimize out*.png anim.gif
-</code></pre>
-<p>Using ImageMagick is sometimes slow.  Using <code>kazam</code> (and only capturing a window) will create an <code>mp4</code> file that can be exploded:</p>
-<pre><code class="language-bash">$ ffmpeg -i inp.mp4 pic%03d.jpg
-$ for x in `ls pic*.jpg`
-do
-  mogrify -crop 1000x700+0+70 $x
-done
-$ convert -layers optimize pic*.jpg out.gif
-</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>$ <span class="ex">convert</span> -delay 1 -layers optimize out*.png anim.gif</span></code></pre></div>
+<p>Using ImageMagick is sometimes slow. Using <code>kazam</code> (and only capturing a window) will create an <code>mp4</code> file that can be exploded:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>$ <span class="ex">ffmpeg</span> -i inp.mp4 pic%03d.jpg</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>$ <span class="kw">for</span> <span class="ex">x</span> in <span class="kw">`</span><span class="fu">ls</span> pic*.jpg<span class="kw">`</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">do</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>  <span class="ex">mogrify</span> -crop 1000x700+0+70 <span class="va">$x</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="kw">done</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>$ <span class="ex">convert</span> -layers optimize pic*.jpg out.gif</span></code></pre></div>
 <p>Where <code>mogrify</code> alters the image file in place and <code>-crop</code> crops the top pixels (to get rid of the tabs and URL if it's a web browser, say).</p>
-<p>Sometimes ImageMagick has a lot of issues when trying to create an animated Gif, especially if there are many frames.  Instead, you can use <code>ffmpeg</code> directly (see <a href="http://superuser.com/a/893031">SO</a>):</p>
-<pre><code class="language-bash">$ palette=&quot;/tmp/palette.png&quot;
-$ filters=&quot;fps=15,scale=320:-1:flags=lanczos&quot;
-$ ffmpeg -i input.mp4 -vf &quot;$filters,palettegen&quot; -y $palette
-$ ffmpeg -i input.mp4 -i $palette -lavfi &quot;$filters [x]; [x][1:v] paletteuse&quot; -y output.gif
-</code></pre>
+<p>Sometimes ImageMagick has a lot of issues when trying to create an animated Gif, especially if there are many frames. Instead, you can use <code>ffmpeg</code> directly (see <a href="http://superuser.com/a/893031">SO</a>):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>$ <span class="va">palette=</span><span class="st">&quot;/tmp/palette.png&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>$ <span class="va">filters=</span><span class="st">&quot;fps=15,scale=320:-1:flags=lanczos&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>$ <span class="ex">ffmpeg</span> -i input.mp4 -vf <span class="st">&quot;</span><span class="va">$filters</span><span class="st">,palettegen&quot;</span> -y <span class="va">$palette</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>$ <span class="ex">ffmpeg</span> -i input.mp4 -i <span class="va">$palette</span> -lavfi <span class="st">&quot;</span><span class="va">$filters</span><span class="st"> [x]; [x][1:v] paletteuse&quot;</span> -y output.gif</span></code></pre></div>
 <p><code>ffmpeg</code> can apparently also directly create (large) animated Gifs:</p>
-<pre><code class="language-bash">$ ffmpeg -i input.mp4 large_output.gif
-</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>$ <span class="ex">ffmpeg</span> -i input.mp4 large_output.gif</span></code></pre></div>
 <p>To reduce the <code>large_output.gif</code>, <code>gifsicle</code> can be used:</p>
-<pre><code class="language-bash">$ gifsicle -O1 --loop large_output.gif &gt; slim_output.gif
-</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>$ <span class="ex">gifsicle</span> -O1 --loop large_output.gif <span class="op">&gt;</span> slim_output.gif</span></code></pre></div>
 <p>though <code>gifsicle</code> looks to have some problems compressing well.</p>
 <p>To take a sub range of pictures from <code>gifsicle</code>, you can do something like:</p>
-<pre><code class="language-bash">$ gifsicle -U inp.gif '#50-73' &gt; out50-73.gif
-</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>$ <span class="ex">gifsicle</span> -U inp.gif <span class="st">&#39;#50-73&#39;</span> <span class="op">&gt;</span> out50-73.gif</span></code></pre></div>
 <p>Where the <code>#</code> specifies the frame range and the <code>-U</code> (unoptimize) option is needed to get rid of artifacts that appear to happen when selecting from a mid range of frames.</p>
 <p><strong>recommended workflow</strong></p>
 <ul>
@@ -112,6 +100,7 @@ $ ffmpeg -i input.mp4 -i $palette -lavfi &quot;$filters [x]; [x][1:v] paletteuse
 <li>use the above script to convert from <code>.mp4</code> to animated Gif with <code>ffmpeg</code></li>
 </ul>
 <h6 id="2015-11-01">2015-11-01</h6>
+
 
       </section>
 
@@ -122,6 +111,6 @@ $ ffmpeg -i input.mp4 -i $palette -lavfi &quot;$filters [x]; [x][1:v] paletteuse
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

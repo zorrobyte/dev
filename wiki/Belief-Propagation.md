@@ -1,4 +1,4 @@
-Thanks. Belief Propagation
+Belief Propagation
 ===
 
 Introduction
@@ -165,9 +165,9 @@ point of the Bethe Free Energy, $F_\beta$:
 
 $$
 \begin{array}{ll}
-\phi _ {i,j} (d _ 0, d _ 1 ) = & f ( d _ 0, d _ 1 ) g ( d _ 0 ) g ( d _ 1 ) \\
-b _ {i,j} (d _ 0,d _ 1)  = & \alpha \phi _ {i,j} ( d _ 0, d _ 1 )  \prod _ { k \in N(i) / j } \mu _ {k,i} ( d_0) \prod _ { l \in N(j) / i } \mu _ {l,j} (d _ 1) \\
-F _ {\beta} (f, g)  = & \sum _ {i,j} \sum _ {d _ 0, d _ 1} b _ {i,j} ( d _ 0, d _ 1 ) [ \ln(b _ {i,j} (d _ 0, d _ 1 )) - \ln( \phi _ {i,j} ( d _ 0 ) ) ] \\
+\phi _ {i,j} (d _ 0, d _ 1 ) = & f ( d _ 0, d _ 1 ) g ( d _ 0 ) g ( d _ 1 ) \\\\
+b _ {i,j} (d _ 0,d _ 1)  = & \alpha \phi _ {i,j} ( d _ 0, d _ 1 )  \prod _ { k \in N(i) / j } \mu _ {k,i} ( d_0) \prod _ { l \in N(j) / i } \mu _ {l,j} (d _ 1) \\\\
+F _ {\beta} (f, g)  = & \sum _ {i,j} \sum _ {d _ 0, d _ 1} b _ {i,j} ( d _ 0, d _ 1 ) [ \ln(b _ {i,j} (d _ 0, d _ 1 )) - \ln( \phi _ {i,j} ( d _ 0 ) ) ] \\\\
  & - \sum _ {i} (q _ i - 1) \sum _ d b _ i (d)  [ \ln ( b _ i ( d ) ) - \ln( g ( d ) ) ] 
 \end{array}
 $$
@@ -179,7 +179,7 @@ Imposing the constraints:
 
 $$
 \begin{array}{l}
-\sum _ d b _ i (d) = 1 \\
+\sum _ d b _ i (d) = 1 \\\\
 \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) = b _ j ( d _ 1 )
 \end{array}
 $$
@@ -191,21 +191,21 @@ for the $\sum _ {d} \mu _ {i,j} (d) = 1$ constraint:
 
 $$
 \begin{array}{ll}
-L = & F _ {\beta} \\
- & - \lambda _ {i,j} (d_1) \left[ \left( \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) \right) - b _ j ( d _ 1 ) \right] \\
- & - \gamma _ i \left[ \sum _ d b _ i (d) - 1 \right] \\
- & - \gamma _ {i,j} \left[ \sum _ {d} \mu _ {i,j} (d) - 1 \right] \\
+L = & F _ {\beta} \\\\
+ & - \lambda _ {i,j} (d_1) \left[ \left( \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) \right) - b _ j ( d _ 1 ) \right] \\\\
+ & - \gamma _ i \left[ \sum _ d b _ i (d) - 1 \right] \\\\
+ & - \gamma _ {i,j} \left[ \sum _ {d} \mu _ {i,j} (d) - 1 \right] \\\\
 \end{array}
 $$
 
 
 $$
 \begin{array}{rl}
-\frac{ \partial L }{ \partial b _ {i,j} ( d _ 0, d _ 1 ) }  = & 0 \\
-\to & \ln b _ {i,j} (d _ 0, d _ 1) = \ln( \phi _ {i,j} (d _ 0, d _ 1) ) + \lambda _ {i,j}(d _ 1) + \lambda _ {j,i}(d _ 0) + \gamma _ {i,j} - 1 \\
-\frac{ \partial L }{ \partial b _ i (d _ 0) }  = & 0 \\
-\to & (q _ i - 1)( \ln b _ i ( d _ 0 ) + 1)  = \ln g ( d _ 0) + \sum _ {j \in N(i) } \lambda _ {j,i} (d _ 1) + \gamma _ i \\
-\lambda _ {i,j} ( d _ 1 ) = & \ln \prod _ {k \in N(j) / i } \mu _ {k,j} ( d _ 1 )  \\
+\frac{ \partial L }{ \partial b _ {i,j} ( d _ 0, d _ 1 ) }  = & 0 \\\\
+\to & \ln b _ {i,j} (d _ 0, d _ 1) = \ln( \phi _ {i,j} (d _ 0, d _ 1) ) + \lambda _ {i,j}(d _ 1) + \lambda _ {j,i}(d _ 0) + \gamma _ {i,j} - 1 \\\\
+\frac{ \partial L }{ \partial b _ i (d _ 0) }  = & 0 \\\\
+\to & (q _ i - 1)( \ln b _ i ( d _ 0 ) + 1)  = \ln g ( d _ 0) + \sum _ {j \in N(i) } \lambda _ {j,i} (d _ 1) + \gamma _ i \\\\
+\lambda _ {i,j} ( d _ 1 ) = & \ln \prod _ {k \in N(j) / i } \mu _ {k,j} ( d _ 1 )  \\\\
 \to & ???
 \end{array}
 $$
@@ -568,7 +568,7 @@ Appendix
 
 $$
 \begin{align}
-I(X;Y) & = D_{KL}(p_{X,Y} || p_X \cdot p_Y ) \\
+I(X;Y) & = D_{KL}(p_{X,Y} || p_X \cdot p_Y ) \\\\
  & = \sum_{x \in X} \sum_{y \in Y} P_{X,Y}(x,y) \ln( \frac{P_{X,Y}(x,y)}{P_X(x) P_Y(y)} )
 \end{align}
 $$
@@ -583,8 +583,8 @@ For $X = Y$, this reduces to:
 
 $$
 \begin{align}
-&  \sum_{x \in X} \sum_{y \in X} P_{X,X}(x,y) \ln( \frac{P_{X,X}(x,y) }{P_X(x) P_X(y)} ) \\
-= & \sum_{x \in X} P_X(x) \ln( \frac{P_X(x) }{P_X(x) P_X(x)} ) \\
+&  \sum_{x \in X} \sum_{y \in X} P_{X,X}(x,y) \ln( \frac{P_{X,X}(x,y) }{P_X(x) P_X(y)} ) \\\\
+= & \sum_{x \in X} P_X(x) \ln( \frac{P_X(x) }{P_X(x) P_X(x)} ) \\\\
 = & - \sum_{x \in X} P_X(x) \ln( P_X(x) ) \\
 \end{align}
 $$
@@ -626,13 +626,13 @@ functions $u_i(\cdot)$:
 
 $$
 \begin{align}
-u_0 ( v_6 ) & = \sum _ { v_0 = 0 } ^ { D - 1 } f( v_0, v_6 ) \\
-u_1 ( v_6 ) & = \sum _ { v_1 = 0 } ^ { D - 1 } f( v_1, v_6 ) \\
-u_2 ( v_5 ) & = \sum _ { v_2 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\
-u_3 ( v_5 ) & = \sum _ { v_3 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\
-u_4 ( v_5 ) & = \sum _ { v_4 = 0 } ^ { D - 1 } f( v_4, v_5 ) \\
-u_6 ( v_7 ) & = \sum _ { v_6 = 0 } ^ { D - 1 } f( v_6, v_7 ) \cdot u_0(v_6) \cdot u_1(v_6) \\
-u_5 ( v_7 ) & = \sum _ { v_5 = 0 } ^ { D - 1 } f( v_5, v_7 ) \cdot u_3(v_5) \cdot u_4(v_5) \\
+u_0 ( v_6 ) & = \sum _ { v_0 = 0 } ^ { D - 1 } f( v_0, v_6 ) \\\\
+u_1 ( v_6 ) & = \sum _ { v_1 = 0 } ^ { D - 1 } f( v_1, v_6 ) \\\\
+u_2 ( v_5 ) & = \sum _ { v_2 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\\\
+u_3 ( v_5 ) & = \sum _ { v_3 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\\\
+u_4 ( v_5 ) & = \sum _ { v_4 = 0 } ^ { D - 1 } f( v_4, v_5 ) \\\\
+u_6 ( v_7 ) & = \sum _ { v_6 = 0 } ^ { D - 1 } f( v_6, v_7 ) \cdot u_0(v_6) \cdot u_1(v_6) \\\\
+u_5 ( v_7 ) & = \sum _ { v_5 = 0 } ^ { D - 1 } f( v_5, v_7 ) \cdot u_3(v_5) \cdot u_4(v_5) \\\\
 u_7 & = \sum _ { v_7 = 0 } ^ { D - 1 } u_6(v_7) \cdot u_5(v_7)
 \end{align}
 $$

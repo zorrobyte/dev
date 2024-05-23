@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -54,124 +54,123 @@
         <h1 id="loose-standards-for-command-line-options">Loose Standards for Command Line Options</h1>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>option</th>
 <th>description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>-a</td>
 <td>all</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-b</td>
 <td>buffer / block size</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-c</td>
 <td>comand</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-d</td>
 <td>debug or delete</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-D</td>
 <td>define</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-e</td>
 <td>execute</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-f</td>
 <td>file (input)</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-h</td>
 <td>help</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-i</td>
 <td>interactive / initialize</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-I</td>
 <td>include</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-k</td>
 <td>keep / kill</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-l</td>
 <td>list / load / login / length / lock</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-m</td>
 <td>message / mode</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-n</td>
 <td>number</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-o</td>
 <td>output</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-p</td>
 <td>port / protocol</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-q</td>
 <td>quiet</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-r / -R</td>
 <td>recurse</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-s</td>
 <td>silent / subject</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-t</td>
 <td>tag</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-u</td>
 <td>user</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-v</td>
 <td>verbose / version</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-V</td>
 <td>version</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-w</td>
 <td>width / warning</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-x</td>
 <td>debug / extract</td>
 </tr>
-<tr>
+<tr class="even">
 <td>-y</td>
 <td>yes</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-z</td>
 <td>compress</td>
 </tr>
 </tbody>
 </table>
-<p>From an answer on <a href="https://stackoverflow.com/questions/2199624/should-the-command-line-usage-be-printed-on-stdout-or-stderr">SO</a>,
-a good convention seems to be:</p>
+<p>From an answer on <a href="https://stackoverflow.com/questions/2199624/should-the-command-line-usage-be-printed-on-stdout-or-stderr">SO</a>, a good convention seems to be:</p>
 <ul>
 <li>When no options are given, show help and print to <code>stderr</code> with an error code</li>
 <li>When the <code>-h</code> or <code>--help</code> option are given, provide help on <code>stdout</code> and give no error</li>
@@ -183,6 +182,7 @@ a good convention seems to be:</p>
 </ul>
 <h6 id="2017-12-25">2017-12-25</h6>
 
+
       </section>
 
       <!--
@@ -192,6 +192,6 @@ a good convention seems to be:</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -52,49 +52,48 @@
       <section>
 
         <h1 id="project-organization">Project Organization</h1>
-<p>These are notes on "best practices" for Git project
-organization.</p>
+<p>These are notes on "best practices" for Git project organization.</p>
 <h2 id="directory-structure">Directory Structure</h2>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>File or Directory</th>
 <th>Description</th>
 <th>Misc</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><code>src/</code></td>
 <td>Source files.</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>dist/</code> or <code>bin/</code></td>
-<td>Should remain empty in repo.  Populated on compilation.</td>
+<td>Should remain empty in repo. Populated on compilation.</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>tests/</code></td>
 <td>Test suite.</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>examples/</code></td>
 <td>Example usage</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>README.md</code></td>
 <td>Project description</td>
 <td></td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>LICENSE</code></td>
 <td>License file for source</td>
 <td></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><code>.gitignore</code></td>
 <td>Git ignore file.</td>
 <td></td>
@@ -105,15 +104,13 @@ organization.</p>
 <h3 id="src"><code>src/</code></h3>
 <p>The source files of the project.</p>
 <h3 id="dist"><code>dist/</code></h3>
-<p>The destination directory for compiled source files.
-This directory should remain empty in the main Git repo.</p>
+<p>The destination directory for compiled source files. This directory should remain empty in the main Git repo.</p>
 <h3 id="tests"><code>tests/</code></h3>
 <p>The test suite to make sure the running code passes testing.</p>
 <h3 id="examples"><code>examples/</code></h3>
 <p>Example usage of your program on small datasets (where applicable).</p>
 <h3 id="readmemd"><code>README.md</code></h3>
-<p>A description of the project.
-This should contain the following, preferably in this order:</p>
+<p>A description of the project. This should contain the following, preferably in this order:</p>
 <ul>
 <li>Screenshot</li>
 <li>Description of what the project is</li>
@@ -122,22 +119,13 @@ This should contain the following, preferably in this order:</p>
 <li>How to compile (if applicable)</li>
 <li>How to run</li>
 <li>Example usage</li>
-<li>The license it's under, even if you have a <code>LICENSE</code> file.
-  If there are multiple licenses then describe what each portion
-  of the project falls under which license or where to find that
-  information out.</li>
+<li>The license it's under, even if you have a <code>LICENSE</code> file. If there are multiple licenses then describe what each portion of the project falls under which license or where to find that information out.</li>
 <li>Credits (if applicable)</li>
 <li>References (if applicable)</li>
 </ul>
-<p>If a screenshot isn't appropriate for the project (say it's a simple command line
-program) then either a block of test with a sample run or an arbitrary picture
-should be used.
-If it's unclear what to use as a screenshot, use a free/libre licensed cat picture.</p>
+<p>If a screenshot isn't appropriate for the project (say it's a simple command line program) then either a block of test with a sample run or an arbitrary picture should be used. If it's unclear what to use as a screenshot, use a free/libre licensed cat picture.</p>
 <h3 id="license"><code>LICENSE</code></h3>
-<p>The license of the software.
-If there are multiple licenses, some options are to make a file per license used
-with some description either in the file or outside, as to which files in the project
-fall under which license or to concatenate all licenses into a single file.</p>
+<p>The license of the software. If there are multiple licenses, some options are to make a file per license used with some description either in the file or outside, as to which files in the project fall under which license or to concatenate all licenses into a single file.</p>
 <h3 id="gitignore"><code>.gitignore</code></h3>
 <p>The files for Git to ignore.</p>
 <p>Some common options are :</p>
@@ -164,6 +152,7 @@ fall under which license or to concatenate all licenses into a single file.</p>
 </ul>
 <h6 id="2017-08-05">2017-08-05</h6>
 
+
       </section>
 
       <!--
@@ -173,6 +162,6 @@ fall under which license or to concatenate all licenses into a single file.</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

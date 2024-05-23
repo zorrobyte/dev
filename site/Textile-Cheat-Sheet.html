@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -53,70 +53,64 @@
 
         <h2 id="textile-cheat-sheet">Textile Cheat Sheet</h2>
 <table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>Header (h1)</td>
 <td>h1.</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Header (h2)</td>
 <td>h2.</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Header (h3)</td>
 <td>h3.</td>
 </tr>
-<tr>
+<tr class="even">
 <td>link (aligned)</td>
-<td>@"text":http://url@, @!&gt;pic.png!@</td>
+<td>@"text":<a href="http://url@">http://url@</a>, @!&gt;pic.png!@</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>picture link</td>
-<td>@!http://url!@</td>
+<td>@!<a href="http://url!@">http://url!@</a></td>
 </tr>
-<tr>
+<tr class="even">
 <td>code block</td>
-<td>&#60;pre&gt; &lt;/pre&gt;</td>
+<td>&lt;pre&gt; &lt;/pre&gt;</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>bold</strong></td>
-<td>&#42;&#42;bold&#42;&#42;</td>
+<td>**bold**</td>
 </tr>
-<tr>
+<tr class="even">
 <td><em>bold</em></td>
-<td>&#42;bold&#42;</td>
+<td>*bold*</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><em>italic</em></td>
-<td>&#95;italic&#95;</td>
+<td>_italic_</td>
 </tr>
-<tr>
+<tr class="even">
 <td><code>literal</code></td>
-<td>&#64;literal&#64;</td>
+<td>@literal@</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>paragraph alignment</td>
 <td>@p&lt;.@, @p=.@, @p&gt;.@</td>
 </tr>
-<tr>
+<tr class="even">
 <td>paragraph indent</td>
 <td>@p(.@, @p((.@, ..., @p().@, ..., @p)).@, @p).@</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>dot list</td>
 <td>@*@, @**@, ...</td>
 </tr>
-<tr>
+<tr class="even">
 <td>numbered list</td>
 <td>@#@, @##@, ...</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>block quote</td>
 <td>@bq.@</td>
 </tr>
@@ -142,6 +136,7 @@
 </ul>
 <h6 id="2015-10-20">2015-10-20</h6>
 
+
       </section>
 
       <!--
@@ -151,6 +146,6 @@
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

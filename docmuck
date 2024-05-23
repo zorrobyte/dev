@@ -1,0 +1,110 @@
+#!/usr/bin/python3
+#
+# To the extent possible under law, the person who associated CC0 with
+# this project has waived all copyright and related or neighboring rights
+# to this project.
+#
+# You should have received a copy of the CC0 legalcode along with this
+# work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+#
+
+
+
+import re
+import yaml
+import os, sys
+import json
+import subprocess as sp
+
+YAML_CONFIG = "./mkdocs.yml"
+
+HTML_TEMPLATE = ""
+CONFIG_DATA = {}
+
+BASE_DIR = "dev_theme/"
+
+HTML_TEMPLATE_FN = BASE_DIR + "base.html"
+
+ARTICLE_SRC_DIR = "wiki/"
+ARTICLE_DST_DIR = "site/"
+
+ARTICLE_LIST = [
+  "index.md", "Textile-Cheat-Sheet.md", "Image-Resize.md",
+  "Screenshots-Screencasts-Animated-Gifs.md", "ffmpeg-notes.md", "Unix-y-notes.md",
+  "lattice-reduction.md", "GCode-Conversion.md", "Git-Rename-Master.md",
+  "MkDocs-Quickstart.md", "GPG-Notes.md", "Git-Notes.md",
+  "Shannon-Entropy.md", "Enabling-Server-HTTPS.md", "BGZF-Example.md",
+  "Kelly-Criterion.md", "C-Project-Template.md", "Project-Organization.md",
+  "File-Naming-Conventions.md", "Command-Line-Option-Loose-Standard.md", "PCB-Notes.md",
+  "Coding-Style.md", "Energy-Consumption-Stats.md", "Simple-Sum.md",
+  "Fisher-Yates-Shuffle.md", "Halting-Problem.md", "Assorted-Small-Probability-Problems.md",
+  "Probability-Notes.md", "Amdahls-Law.md", "Is-It-Really-Open.md",
+  "Number-Theory-Notes.md", "Arbitrary-Binary-Functions.md", "Empirical-Laws.md",
+  "Food-CO2-Water.md", "SSH-Recipes.md", "Future-Predictions.md",
+  "Diophantine-Approximation.md", "GCode-Common.md", "Misc-Math.md",
+  "Socio-Economic-Definitions.md", "Bitcoin-Moon-Math.md", "Energy-Discussion.md",
+  "AWK-Cheatsheet.pdmd", "Littlewood-Polynomials-Notes.md", "Useful-Tables.md",
+  "Belief-Propagation.md", "Probability-Definitions.md", "Puzzle-Ribbon-Tiles.md",
+  "Kullback-Leibler-Divergence.md", "Statistical-Mechanics-For-Computer-Scientists.md" ]
+
+
+with open(YAML_CONFIG) as fp:
+  try:
+    CONFIG_DATA = yaml.safe_load(fp)
+  except yaml.YAMLError as e:
+    print(e)
+    sys.exit(-1)
+
+#print(json.dumps(CONFIG_DATA, indent=2))
+
+#with open( CONFIG_DATA["theme"]["custom_dir"] + "base.html" ) as fp:
+with open( HTML_TEMPLATE_FN ) as fp:
+  HTML_TEMPLATE = fp.read()
+
+sp.call(['mkdir', '-p', ARTICLE_DST_DIR])
+sp.call(['cp', '-r', BASE_DIR + 'js', ARTICLE_DST_DIR])
+sp.call(['cp', '-r', BASE_DIR + 'css', ARTICLE_DST_DIR])
+sp.call(['cp', '-r', BASE_DIR + 'img', ARTICLE_DST_DIR])
+
+sp.call(['cp', '-r', ARTICLE_SRC_DIR + 'img', ARTICLE_DST_DIR])
+sp.call(['cp', '-r', ARTICLE_SRC_DIR + 'src', ARTICLE_DST_DIR])
+
+
+#print(HTML_TEMPLATE)
+
+for base_md_fn in ARTICLE_LIST:
+
+  # default to github flavored markdown
+  #
+  input_fmt = "gfm"
+  input_article_sfx = ".md"
+
+  # `pdmd` == Pandoc flavored Markdown
+  #
+  if (re.search('\.pdmd$', base_md_fn)):
+    input_fmt = "markdown"
+    input_article_sfx = ".pdmd"
+
+
+  md_fn = ARTICLE_SRC_DIR + base_md_fn
+
+  tmp_fn = "/tmp/out_tmp.html"
+
+  sp.call(['pandoc', '-f', input_fmt, '-o', tmp_fn, md_fn])
+
+  html_snippet = ""
+  with open(tmp_fn) as fp:
+    html_snippet = fp.read()
+
+  html_article = HTML_TEMPLATE
+  html_article = html_article.replace('{{page.content}}', html_snippet)
+
+  ARTICLE_FN = ARTICLE_DST_DIR + base_md_fn.replace(input_article_sfx, '.html')
+
+  print(ARTICLE_FN, "(", input_fmt, ")")
+
+  with open(ARTICLE_FN, "w") as fp:
+    fp.write(html_article)
+
+
+

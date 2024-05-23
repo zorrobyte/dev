@@ -21,9 +21,9 @@ $$
 
 $$
 \begin{align}
-E[ X + Y ] & = \int \int (s + t) \Pr\\{ X = s \  \& \ Y = t \\} \ ds \ dt \\\\
- & = \int \int s \Pr \\{ X = s \ \& \  Y = t \\} \ ds \ dt + \int \int t \Pr \\{ X = s \ \& \ Y = t \\} \ ds \ dt \\\\
- & = \int \int s \Pr \\{ X = s \ \& \ Y = t \\} \ dt \ ds + \int \int t \Pr \\{ X = s \ \& \ Y = t \\} \ ds \ dt \\\\
+E[ X + Y ] & = \int \int (s + t) \Pr\\{ X = s \  \\& \ Y = t \\} \ ds \ dt \\\\
+ & = \int \int s \Pr \\{ X = s \ \\& \  Y = t \\} \ ds \ dt + \int \int t \Pr \\{ X = s \ \\& \ Y = t \\} \ ds \ dt \\\\
+ & = \int \int s \Pr \\{ X = s \ \\& \ Y = t \\} \ dt \ ds + \int \int t \Pr \\{ X = s \ \\& \ Y = t \\} \ ds \ dt \\\\
  & = \int s \Pr \\{ X = s \\} \ ds + \int t \Pr \\{ Y = t \\} \ dt \\\\
  & = E[X] + E[Y]
 \end{align}
@@ -40,11 +40,11 @@ Bayes' Theorem
 
 
 $$
-\Pr\\{ A | B \\} = \frac{ \Pr\\{ A \& B \\} }{ \Pr\\{ B \\} }
+\Pr\\{ A | B \\} = \frac{ \Pr\\{ A \\& B \\} }{ \Pr\\{ B \\} }
 $$
 
 $$
-\Pr\\{ B | A \\} = \frac{ \Pr\\{ A \& B \\} }{ \Pr\\{ A \\} }
+\Pr\\{ B | A \\} = \frac{ \Pr\\{ A \\& B \\} }{ \Pr\\{ A \\} }
 $$
 
 $$

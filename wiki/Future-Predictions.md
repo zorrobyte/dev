@@ -31,7 +31,7 @@ The fundamental assumptions for this prediction are:
 * AI will be achieved when commodity hardware is available, in the form of roughly a $1000 option, that has the compute and storage of the human brain (3.2Pb)
 
 Using [jcmit.net/diskprice](https://jcmit.net/diskprice.htm) as a source, depending on how you count, hard drive prices fall at a rate of 1/2 every 2-3 years.
-As of this writing, the prices is about $\$$150/8Tb (.00000000001705302565 $\$$US/byte).
+As of this writing, the prices is about $\\$$150/8Tb (.00000000001705302565 $\\$$US/byte).
 
 $$
 \begin{equation}
@@ -45,7 +45,7 @@ $$
 $y$ is the number of years and 
 $\alpha$ is the doubling factor.
 If $\alpha \in (\frac{1}{2}, \frac{1}{3})$, this gives a timeline of roughly 10 to 16 years before we'll see a hard drive that has the storage capacity of the human brain for
-about $\$$1000 USD.
+about $\\$$1000 USD.
 
 The 2030 prediction is a bit aggressive and considering Moore's law might be slowing down, the timeline might be closer to 2040.
 Regardless, I am staying with my 2030 prediction.
@@ -122,17 +122,17 @@ Energy Production
 
 Swanson's law ([w](https://en.wikipedia.org/wiki/Swanson%27s_law)) has photo voltaic cell prices falling at about 10% per year.
 This is roughly a price halving every 6-7 years.
-Current prices are about $\$$0.75 / W for low volume consumer panels and $\$$0.20 / W for higher volumes.
+Current prices are about $\\$$0.75 / W for low volume consumer panels and $\\$$0.20 / W for higher volumes.
 
 I guess there's debate on whether batteries follow a Moore's law like price curve ([src](https://longtailpipe.com/2013/04/06/there-is-moores-law-for-batteries-its/) [src](https://longtailpipe.com/2013/04/06/there-is-moores-law-for-batteries-its/)) but prices are falling at about %20 per year ([src](https://about.bnef.com/blog/behind-scenes-take-lithium-ion-battery-prices/)) perhaps due to Wright's law ([w](https://en.wikipedia.org/wiki/Experience_curve_effects)).
-Regardless, as of this writing, lead acid batteries are at $\$$0.15/Wh and lithium batteries look to be somewhere in the range of $\$$0.15/Wh to $\$$0.05/Wh.
+Regardless, as of this writing, lead acid batteries are at $\\$$0.15/Wh and lithium batteries look to be somewhere in the range of $\\$$0.15/Wh to $\\$$0.05/Wh.
 
 The average US household consumes 30 kWh per day.
 Assuming a 12 hour sunlight window, that's $30 kWh / 12h = 2500 W$ needed.
-The average American pays $\$$0.1854/kWh leading to about $\$$1400/year in electricity costs ([src](https://www.eia.gov/tools/faqs/faq.php?id=97&t=3)).
+The average American pays $\\$$0.1854/kWh leading to about $\\$$1400/year in electricity costs ([src](https://www.eia.gov/tools/faqs/faq.php?id=97&t=3)).
 
-If we assume we want at least a 2.5KW solar panel array and storage for 30kWh, that's $\$$2000 to $\$$6500, which is 2-5 years before the installation pays for itself.
-In five years time that changes to about $\$$800 to $\$$2500, which is about 0.5 to 2 years before the installation pays for itself.
+If we assume we want at least a 2.5KW solar panel array and storage for 30kWh, that's $\\$$2000 to $\\$$6500, which is 2-5 years before the installation pays for itself.
+In five years time that changes to about $\\$$800 to $\\$$2500, which is about 0.5 to 2 years before the installation pays for itself.
 
 Solar and battery technology might have a lot of hidden costs and other factors that might prohibit them from falling in price so drastically over the coming years
 but when an installation gets within the cost of a single months electricity payment, it's hard to see how this couldn't become widely adopted.

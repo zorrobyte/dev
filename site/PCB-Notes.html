@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -53,9 +53,7 @@
 
         <h1 id="pcb-notes">PCB Notes</h1>
 <h2 id="pcb-thickness">PCB Thickness</h2>
-<p>Copper thickness is commonly expressed in <code>oz</code>, for example <code>1 oz Cu</code>.
-This is shorthand for the height of copper if spread over a square foot
-surface.</p>
+<p>Copper thickness is commonly expressed in <code>oz</code>, for example <code>1 oz Cu</code>. This is shorthand for the height of copper if spread over a square foot surface.</p>
 <p>To calculate the height for <code>1 oz</code> <code>Cu</code>, we need a few conversions:</p>
 <ul>
 <li>$ 1\ \mathrm{oz} = 0.0625\ \mathrm{lbs}$</li>
@@ -74,104 +72,99 @@ surface.</p>
 <hr />
 <h2 id="decoupling-capacitors">Decoupling Capacitors</h2>
 <ul>
-<li>Either one 100nF or two, one of 0.1uF and another of 10uF </li>
+<li>Either one 100nF or two, one of 0.1uF and another of 10uF</li>
 <li>Place as close to the chip as possible</li>
 <li>Place the decoupling capacitor across the power supply (3.3v or 5v)</li>
 </ul>
 <p>(<a href="https://www.autodesk.com/products/eagle/blog/what-are-decoupling-capacitors/">src</a>)</p>
 <h2 id="smd-sizes">SMD Sizes</h2>
 <table>
-<thead>
-<tr>
-<th></th>
-</tr>
-</thead>
 <tbody>
-<tr>
-<td><img alt="surface mount sizes" src="img/SMT_sizes%2C_based_on_original_by_Zureks.svg" /></td>
+<tr class="odd">
+<td><img src="img/SMT_sizes,_based_on_original_by_Zureks.svg" alt="surface mount sizes" /></td>
 </tr>
 </tbody>
 </table>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>SMD</th>
 <th>mm</th>
 <th>inch</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>2920</td>
 <td>7.4 x 5.1</td>
 <td>0.29 x 0.20</td>
 </tr>
-<tr>
+<tr class="even">
 <td>2725</td>
 <td>6.9 x 6.3</td>
 <td>0.27 x 0.25</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>2512</td>
 <td>6.3 x 3.2</td>
 <td>0.25 x 0.125</td>
 </tr>
-<tr>
+<tr class="even">
 <td>2010</td>
 <td>5.0 x 2.5</td>
 <td>0.20 x 0.10</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>1825</td>
 <td>4.5 x 6.4</td>
 <td>0.18 x 0.25</td>
 </tr>
-<tr>
+<tr class="even">
 <td>1812</td>
 <td>4.6 x 3.0</td>
 <td>0.18 x 0.125</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>1806</td>
 <td>4.5 x 1.6</td>
 <td>0.18 x 0.06</td>
 </tr>
-<tr>
+<tr class="even">
 <td>1210</td>
 <td>3.2 x 2.5</td>
 <td>0.125 x 0.10</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>1206</td>
 <td>3.0 x 1.5</td>
 <td>0.12 x 0.06</td>
 </tr>
-<tr>
+<tr class="even">
 <td>1008</td>
 <td>2.5 x 2.0</td>
 <td>0.10 x 0.08</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>0805</td>
 <td>2.0 x 1.3</td>
 <td>0.08 x 0.05</td>
 </tr>
-<tr>
+<tr class="even">
 <td>0603</td>
 <td>1.5 x 0.8</td>
 <td>0.06 x 0.03</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>0402</td>
 <td>1.0 x 0.5</td>
 <td>0.04 x 0.02</td>
 </tr>
-<tr>
+<tr class="even">
 <td>0201</td>
 <td>0.6 x 0.3</td>
 <td>0.02 x 0.01</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>01005</td>
 <td>0.4 x 0.2</td>
 <td>0.016 x 0.008</td>
@@ -180,55 +173,284 @@ surface.</p>
 </table>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Package</th>
 <th>Pitch (mm)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>SOIC</td>
 <td>1.27</td>
 </tr>
-<tr>
+<tr class="even">
 <td>TSOP</td>
 <td>0.5</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>SSOP</td>
 <td>0.635</td>
 </tr>
-<tr>
+<tr class="even">
 <td>QSOP</td>
 <td>0.635</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>VSOP</td>
 <td>0.4, 0.5, 0.65</td>
 </tr>
-<tr>
+<tr class="even">
 <td>LQFP</td>
 <td>1.4</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>PLCC</td>
 <td>1.27</td>
 </tr>
 </tbody>
 </table>
 <table>
-<thead>
-<tr>
-<th></th>
-</tr>
-</thead>
 <tbody>
-<tr>
-<td><img alt="surface mount cheat sheet" src="img/smd_cheat_sheet.png" /></td>
+<tr class="odd">
+<td><img src="img/smd_cheat_sheet.png" alt="surface mount cheat sheet" /></td>
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="common-designator-meanings">Common Designator Meanings</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Designator</th>
+<th>Component type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>Separable assembly, Sub-assembly (e.g. printed circuit assembly)</td>
+</tr>
+<tr class="even">
+<td>AN, AS</td>
+<td>Antenna</td>
+</tr>
+<tr class="odd">
+<td>AR</td>
+<td>Amplifier</td>
+</tr>
+<tr class="even">
+<td>AT</td>
+<td>Attenuator, Isolator</td>
+</tr>
+<tr class="odd">
+<td>BR</td>
+<td>Bridge rectifier</td>
+</tr>
+<tr class="even">
+<td>B, BT</td>
+<td>Battery</td>
+</tr>
+<tr class="odd">
+<td>BZ</td>
+<td>Buzzer</td>
+</tr>
+<tr class="even">
+<td>C</td>
+<td>Capacitor</td>
+</tr>
+<tr class="odd">
+<td>CB</td>
+<td>Circuit breaker, Supercapacitor</td>
+</tr>
+<tr class="even">
+<td>CN</td>
+<td>Capacitor network</td>
+</tr>
+<tr class="odd">
+<td>D,</td>
+<td>CR Diode (all types, including LED), Thyristor</td>
+</tr>
+<tr class="even">
+<td>DL</td>
+<td>Delay line</td>
+</tr>
+<tr class="odd">
+<td>DS</td>
+<td>Display, General light source, Lamp, Signal light</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>Fuse</td>
+</tr>
+<tr class="odd">
+<td>FB</td>
+<td>Ferrite bead</td>
+</tr>
+<tr class="even">
+<td>FD</td>
+<td>Fiducial</td>
+</tr>
+<tr class="odd">
+<td>FL</td>
+<td>Filter</td>
+</tr>
+<tr class="even">
+<td>G</td>
+<td>Generator, Oscillator</td>
+</tr>
+<tr class="odd">
+<td>GN</td>
+<td>General network</td>
+</tr>
+<tr class="even">
+<td>H</td>
+<td>Hardware, Screws, Nuts, Washers</td>
+</tr>
+<tr class="odd">
+<td>HY</td>
+<td>Circulator, Directional coupler</td>
+</tr>
+<tr class="even">
+<td>IR</td>
+<td>Infrared diode</td>
+</tr>
+<tr class="odd">
+<td>J</td>
+<td>Jack (least-movable connector of a connector pair), Jack connector (connector may have male pin contacts and/or female socket contacts)</td>
+</tr>
+<tr class="even">
+<td>JP</td>
+<td>Jumper (Link)</td>
+</tr>
+<tr class="odd">
+<td>K</td>
+<td>Relay, Contactor</td>
+</tr>
+<tr class="even">
+<td>L</td>
+<td>Inductor, Coil, Ferrite bead</td>
+</tr>
+<tr class="odd">
+<td>LS</td>
+<td>Loudspeaker, Buzzer</td>
+</tr>
+<tr class="even">
+<td>M</td>
+<td>Mosfet, Motor, Meter, Measuring device</td>
+</tr>
+<tr class="odd">
+<td>MH</td>
+<td>Mounting hole</td>
+</tr>
+<tr class="even">
+<td>MK</td>
+<td>Microphone</td>
+</tr>
+<tr class="odd">
+<td>MP</td>
+<td>Mechanical part (including screws and fasteners)</td>
+</tr>
+<tr class="even">
+<td>OP</td>
+<td>Opto-isolator, Operational amplifier</td>
+</tr>
+<tr class="odd">
+<td>P</td>
+<td>Plug (most-movable connector of a connector pair), Plug connector (connector may have male pin contacts and/or female socket contacts)</td>
+</tr>
+<tr class="even">
+<td>PS</td>
+<td>Power supply</td>
+</tr>
+<tr class="odd">
+<td>Q</td>
+<td>Transistor (all types)</td>
+</tr>
+<tr class="even">
+<td>R</td>
+<td>Resistor</td>
+</tr>
+<tr class="odd">
+<td>RLA, RY</td>
+<td>Relay</td>
+</tr>
+<tr class="even">
+<td>RN</td>
+<td>Resistor network</td>
+</tr>
+<tr class="odd">
+<td>RT</td>
+<td>Thermistor</td>
+</tr>
+<tr class="even">
+<td>RV</td>
+<td>Varistor, Variable resistor</td>
+</tr>
+<tr class="odd">
+<td>S, SW</td>
+<td>Switch (all types, including buttons)</td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>Transformer, Incorrectly used as transistor (see “Q”)</td>
+</tr>
+<tr class="odd">
+<td>TC</td>
+<td>Thermocouple</td>
+</tr>
+<tr class="even">
+<td>TP</td>
+<td>Test point</td>
+</tr>
+<tr class="odd">
+<td>TR</td>
+<td>Transistor, Transducer</td>
+</tr>
+<tr class="even">
+<td>TUN</td>
+<td>Tuner</td>
+</tr>
+<tr class="odd">
+<td>U</td>
+<td>Integrated circuit (IC), Inseparable assembly</td>
+</tr>
+<tr class="even">
+<td>V</td>
+<td>Vacuum tube</td>
+</tr>
+<tr class="odd">
+<td>VR</td>
+<td>Voltage regulator (voltage reference), Variable resistor (potentiometer or rheostat), PTC</td>
+</tr>
+<tr class="even">
+<td>W</td>
+<td>Cable, Wire, Busbar</td>
+</tr>
+<tr class="odd">
+<td>X</td>
+<td>Socket connector for another item not P or J, paired with the letter symbol for that item (XV for vacuum tube socket, XF for fuse holder, XA for printed circuit assembly connector, XU for integrated circuit connector, XDS for light socket, etc.)</td>
+</tr>
+<tr class="even">
+<td>XMER</td>
+<td>Transformer</td>
+</tr>
+<tr class="odd">
+<td>XTAL</td>
+<td>Crystal</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>Crystal, Oscillator</td>
+</tr>
+<tr class="odd">
+<td>Z</td>
+<td>Zener Diode</td>
+</tr>
+</tbody>
+</table>
+<p>(<a href="https://forum.digikey.com/t/pcb-markings-reference-designator-meanings-part-identification/24464">digikey</a>, <a href="https://en.wikipedia.org/wiki/Reference_designator">wp</a>)</p>
 <h6 id="2018-02-03">2018-02-03</h6>
+
 
       </section>
 
@@ -239,6 +461,6 @@ surface.</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -52,83 +52,26 @@
       <section>
 
         <h1 id="simple-sums">Simple Sums</h1>
-<p>$$ 0 &lt; p &lt; 1, p  \in \mathbb{R}$$</p>
+<p>$$ 0 &lt; p &lt; 1, p \in \mathbb{R}$$</p>
 <hr />
-<p>$$
-\begin{align}
-\sum_{k=0}^{\infty} p^k = \frac{1}{1-p}
-\end{align}
-$$</p>
+<p>$$ \begin{align} \sum_{k=0}^{\infty} p^k = \frac{1}{1-p} \end{align} $$</p>
 <p>Proof:</p>
-<p>$$
-\begin{align}
-S &amp; = \sum_{k=0}^{\infty} p^k
-\end{align}
-$$</p>
-<p>$$
-\begin{align}
-\sum_{k=0}^{\infty} p^k &amp; = 1 + \sum_{k=1}^{\infty} p^k
-\end{align}
-$$</p>
-<p>$$
-\begin{align}
-p S &amp;= \sum_{k=0}^{\infty} p^{k+1} \\
- &amp;= \sum_{k=1}^{\infty} p^k \\
-\end{align}
-$$</p>
-<p>$$
-\begin{align}
-S - p S   &amp;= 1 \\
-S &amp;= \frac{1}{1-p} \\
-\end{align}
-$$</p>
+<p>$$ \begin{align} S &amp; = \sum_{k=0}^{\infty} p^k \end{align} $$</p>
+<p>$$ \begin{align} \sum_{k=0}^{\infty} p^k &amp; = 1 + \sum_{k=1}^{\infty} p^k \end{align} $$</p>
+<p>$$ \begin{align} p S &amp;= \sum_{k=0}^{\infty} p^{k+1} \\ &amp;= \sum_{k=1}^{\infty} p^k \\ \end{align} $$</p>
+<p>$$ \begin{align} S - p S &amp;= 1 \\ S &amp;= \frac{1}{1-p} \\ \end{align} $$</p>
 <hr />
-<p>$$
-\begin{align}
-\sum_{k=0}^{s-1} p^k = \frac{1-p^s}{1-p} \\
-\sum_{k=s}^{\infty} p^k = \frac{p^s}{1-p}
-\end{align}
-$$</p>
+<p>$$ \begin{align} \sum_{k=0}^{s-1} p^k = \frac{1-p^s}{1-p} \\ \sum_{k=s}^{\infty} p^k = \frac{p^s}{1-p} \end{align} $$</p>
 <p>Proof:</p>
-<p>$$
-\begin{align}
-\sum_{k=0}^{s-1} p^k &amp;= \sum_{k=0}^{\infty} p^k - \sum_{k=s}^{\infty} p^k \\
-  &amp;= \sum_{k=0}^{\infty} p^k - p^s \sum_{k=0}^{\infty} p^k \\
-  &amp;= \frac{1}{1-p} - \frac{p^s}{1-p} \\
-  &amp;= \frac{1 - p^s}{1-p} \\
-\end{align}
-$$</p>
-<p>$$
-\begin{align}
-\sum_{k=s}^{\infty} p^k &amp;= p^s \sum_{k=0}^{\infty} p^k \\
-   &amp;= \frac{p^s}{1-p} \\
-\end{align}
-$$</p>
+<p>$$ \begin{align} \sum_{k=0}^{s-1} p^k &amp;= \sum_{k=0}^{\infty} p^k - \sum_{k=s}^{\infty} p^k \\ &amp;= \sum_{k=0}^{\infty} p^k - p^s \sum_{k=0}^{\infty} p^k \\ &amp;= \frac{1}{1-p} - \frac{p^s}{1-p} \\ &amp;= \frac{1 - p^s}{1-p} \\ \end{align} $$</p>
+<p>$$ \begin{align} \sum_{k=s}^{\infty} p^k &amp;= p^s \sum_{k=0}^{\infty} p^k \\ &amp;= \frac{p^s}{1-p} \\ \end{align} $$</p>
 <hr />
-<p>$$
-\begin{align}
-\sum_{k=0}^{\infty} k p^k = \frac{p}{(1-p)^2}
-\end{align}
-$$</p>
+<p>$$ \begin{align} \sum_{k=0}^{\infty} k p^k = \frac{p}{(1-p)^2} \end{align} $$</p>
 <p>Proof:</p>
-<p>$$
-\begin{align}
-S' &amp;= \sum_{k=0}^{\infty} k p^k \\
-p S' &amp;= \sum_{k=0}^{\infty} k p^{k+1} \\
- &amp;= \sum_{k=1}^{\infty} (k - 1) p^{k} \\
- &amp;=  \sum_{k=1} k p^k - \sum_{k=1} p^k \\
- &amp;=  S' - \frac{p}{1-p} \\
-p S' - S' &amp;= - \frac{p}{1-p} \\
-S' (p - 1) &amp;= - \frac{p}{1-p} \\
-S' (1 - p) &amp;= \frac{p}{1-p} \\
-S' &amp;= \frac{p}{(1-p)^2} \\
-\end{align}
-$$</p>
-<p>$$
-\begin{align}
-\end{align}
-$$</p>
+<p>$$ \begin{align} S' &amp;= \sum_{k=0}^{\infty} k p^k \\ p S' &amp;= \sum_{k=0}^{\infty} k p^{k+1} \\ &amp;= \sum_{k=1}^{\infty} (k - 1) p^{k} \\ &amp;= \sum_{k=1} k p^k - \sum_{k=1} p^k \\ &amp;= S' - \frac{p}{1-p} \\ p S' - S' &amp;= - \frac{p}{1-p} \\ S' (p - 1) &amp;= - \frac{p}{1-p} \\ S' (1 - p) &amp;= \frac{p}{1-p} \\ S' &amp;= \frac{p}{(1-p)^2} \\ \end{align} $$</p>
+<p>$$ \begin{align} \end{align} $$</p>
 <h6 id="2018-05-25">2018-05-25</h6>
+
 
       </section>
 
@@ -139,6 +82,6 @@ $$</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

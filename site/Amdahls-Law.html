@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -59,28 +59,15 @@
 <li>$T_{p,n}$ - Time for a parallel task with $p$ and $n$</li>
 <li>$F_{p,n} = \frac{T_s}{T_{p,n}} $ - Speedup factor for $p$ and $n$</li>
 </ul>
-<p>$$
-T_{p,n} = T_s (1-p) + \frac{T_s p}{n} \\
-\to \frac{T_{p,n}}{T_s} = 1 - p + \frac{p}{n} \\
-\to \frac{T_s}{T_{p,n}} = \frac{1}{ 1 - p + \frac{p}{n} } \\
-\to F_{p,n} = \frac{1}{ 1 - p + \frac{p}{n} }
-$$</p>
+<p>$$ T_{p,n} = T_s (1-p) + \frac{T_s p}{n} \\ \to \frac{T_{p,n}}{T_s} = 1 - p + \frac{p}{n} \\ \to \frac{T_s}{T_{p,n}} = \frac{1}{ 1 - p + \frac{p}{n} } \\ \to F_{p,n} = \frac{1}{ 1 - p + \frac{p}{n} } $$</p>
 <p>For a completely serial task ($p=0$):</p>
-<p>$$
-F_{p,n} = \frac{1}{ 1 - 0 + \frac{0}{n} } = 1
-$$</p>
+<p>$$ F_{p,n} = \frac{1}{ 1 - 0 + \frac{0}{n} } = 1 $$</p>
 <p>For a completely parallel task ($p=1$):</p>
-<p>$$
-F_{p,n} = \frac{1}{ 1 - 1 + \frac{1}{n} }
- = \frac{1}{ \frac{1}{n} }
- = n
-$$</p>
+<p>$$ F_{p,n} = \frac{1}{ 1 - 1 + \frac{1}{n} } = \frac{1}{ \frac{1}{n} } = n $$</p>
 <p>When $n &gt;&gt; 1$:</p>
-<p>$$
-F_{p,n} = \frac{1}{ 1 - p + \frac{p}{n} } = \frac{n}{ n - n p + p } \\
- \approx \frac{n}{n -n p} = \frac{1}{1-p}
-$$</p>
+<p>$$ F_{p,n} = \frac{1}{ 1 - p + \frac{p}{n} } = \frac{n}{ n - n p + p } \\ \approx \frac{n}{n -n p} = \frac{1}{1-p} $$</p>
 <h6 id="2018-09-03">2018-09-03</h6>
+
 
       </section>
 
@@ -91,6 +78,6 @@ $$</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

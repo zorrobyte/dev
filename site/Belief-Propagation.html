@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -51,46 +51,18 @@
       </header>
       <section>
 
-        <h1 id="thanks-belief-propagation">Thanks. Belief Propagation</h1>
+        <h1 id="belief-propagation">Belief Propagation</h1>
 <h2 id="introduction">Introduction</h2>
-<p>For a set of random variables, ${ \bf x } = ( x_0, x_1, x_2, \cdots, x_{ n-1 } )$,
-and a given probability distribution over those random variables, $p( { \bf x } )$,
-we might like to know what the most likely configuration is.
-Another name for the most likely configuration is the maximum a posteriori (MAP)
-assignment of the variables over their domain.</p>
-<p>Sometimes there is additional structure on the random variables so that the probability function
-can be decomposed into a product of distributions over the subsets of variables.
-If the additional structure is encapsulated in a graphical model, connecting variables
-with an edge and corresponding distribution function, this this can be represented as
-a Markov Random Field (MRF),
-with a set of cliques, represented in a graph structure, whose probability distribution
-function can be written as:</p>
-<p>$$
-\begin{align}
-p( { \bf x } ) &amp; = \frac{1}{Z} \prod_{c \in \text{clique(} G \text{)} } \phi_c ( { \bf x }_c )
-\end{align}
-$$</p>
-<p>A marginal distribution is the probability of fixing a subset of the random variables over
-all possible values of the remaining variables.
-That is:</p>
-<p>$$
-p( { \bf x } _ s  = { \bf d } _ s ) = \sum_{ { \bf x } /  x_s } \text{    } \prod_{ c \in \text{ clique( } G \text{ ) } } \phi_c ( { \bf x } _ c )
-$$</p>
+<p>For a set of random variables, ${ \bf x } = ( x_0, x_1, x_2, \cdots, x_{ n-1 } )$, and a given probability distribution over those random variables, $p( { \bf x } )$, we might like to know what the most likely configuration is. Another name for the most likely configuration is the maximum a posteriori (MAP) assignment of the variables over their domain.</p>
+<p>Sometimes there is additional structure on the random variables so that the probability function can be decomposed into a product of distributions over the subsets of variables. If the additional structure is encapsulated in a graphical model, connecting variables with an edge and corresponding distribution function, this this can be represented as a Markov Random Field (MRF), with a set of cliques, represented in a graph structure, whose probability distribution function can be written as:</p>
+<p>$$ \begin{align} p( { \bf x } ) &amp; = \frac{1}{Z} \prod_{c \in \text{clique(} G \text{)} } \phi_c ( { \bf x }_c ) \end{align} $$</p>
+<p>A marginal distribution is the probability of fixing a subset of the random variables over all possible values of the remaining variables. That is:</p>
+<p>$$ p( { \bf x } _ s = { \bf d } _ s ) = \sum_{ { \bf x } / x_s } \text{ } \prod_{ c \in \text{ clique( } G \text{ ) } } \phi_c ( { \bf x } _ c ) $$</p>
 <p>Where the term on the right fixes the values of ${ \bf x }_s$ where appropriate.</p>
-<p>This problem is NP-Complete in general.
-If the form of the graphical model is a tree, then the marginals can be computed efficiently with a dynamic programming
-like algorithm.</p>
-<p>A dynamic programming like algorithm can be adapted to be used on non-tree like graphs and can be expected to
-work for graphs that have certain restrictions on their topology or structure.
-Since the graph now has loops, the independence property that was needed to make the algorithm efficient is violated.</p>
-<p>The dynamic programming like algorithm is called Belief Propagation (BP), sometimes called Loopy Belief Propagation (LBP)
-for non-tree like graphs.
-For non-tree graphs, the term "probability" is substituted with "messages", as calculations are no longer probability distributions
-any more, with the underlying algorithm for BP described as a "message passing" algorithm.</p>
-<p>The type of structure on the graphs that lead to proper marginal discovery is not well understood in general
-and certainly not understood by me.
-Some clue as to what the structure is comes from the degree of independence of the variables and a somewhat hand-waivy
-heuristic is that if graphs look locally "tree-like" then BP (or LBP) has some expectation of converging to a correct solution.</p>
+<p>This problem is NP-Complete in general. If the form of the graphical model is a tree, then the marginals can be computed efficiently with a dynamic programming like algorithm.</p>
+<p>A dynamic programming like algorithm can be adapted to be used on non-tree like graphs and can be expected to work for graphs that have certain restrictions on their topology or structure. Since the graph now has loops, the independence property that was needed to make the algorithm efficient is violated.</p>
+<p>The dynamic programming like algorithm is called Belief Propagation (BP), sometimes called Loopy Belief Propagation (LBP) for non-tree like graphs. For non-tree graphs, the term "probability" is substituted with "messages", as calculations are no longer probability distributions any more, with the underlying algorithm for BP described as a "message passing" algorithm.</p>
+<p>The type of structure on the graphs that lead to proper marginal discovery is not well understood in general and certainly not understood by me. Some clue as to what the structure is comes from the degree of independence of the variables and a somewhat hand-waivy heuristic is that if graphs look locally "tree-like" then BP (or LBP) has some expectation of converging to a correct solution.</p>
 <hr />
 <p>There are three main graph models that belief propagation looks to be run on:</p>
 <ul>
@@ -100,21 +72,15 @@ heuristic is that if graphs look locally "tree-like" then BP (or LBP) has some e
 </ul>
 <h3 id="markov-random-field">Markov Random Field</h3>
 <p>Finite Markov Random Fields (MRF) will be considered.</p>
-<p>$$ G(V,E), \ \ \  |V| = n, \ \ \ x_i \in D = { d_0, d_1, \cdots, d_{m-1} }  $$</p>
-<p>$$
-i \in V \to g_i(\cdot) \in \mathbb{R}
-$$</p>
-<p>$$
-(i,j) \in E \to f_{i,j}( \cdot, \cdot ) \in \mathbb{R}
-$$</p>
+<p>$$ G(V,E), \ \ \ |V| = n, \ \ \ x_i \in D = { d_0, d_1, \cdots, d_{m-1} } $$</p>
+<p>$$ i \in V \to g_i(\cdot) \in \mathbb{R} $$</p>
+<p>$$ (i,j) \in E \to f_{i,j}( \cdot, \cdot ) \in \mathbb{R} $$</p>
 <ul>
 <li>$x_i$ represents the value of vertex $i$.</li>
 <li>$g_i(x_i)$ is the mapping of vertex $i$ with value $x_i$</li>
-<li>$f_{i,j}(x_i,x_j)$ is the mapping of the connected vertex $i$ and $j$
-  with values $x_i$ and $x_j$, respectively</li>
+<li>$f_{i,j}(x_i,x_j)$ is the mapping of the connected vertex $i$ and $j$ with values $x_i$ and $x_j$, respectively</li>
 </ul>
-<p>For example, $f_{i,j}(x_i,x_j)$ could be an indicator function that
-vertex $i$ and $j$ could have values $x_i$ and $x_j$.</p>
+<p>For example, $f_{i,j}(x_i,x_j)$ could be an indicator function that vertex $i$ and $j$ could have values $x_i$ and $x_j$.</p>
 <h3 id="belief-propagation-on-a-discrete-markov-random-field">Belief Propagation on a (discrete) Markov Random Field</h3>
 <pre><code>::mermaid
 graph LR
@@ -125,102 +91,39 @@ graph LR
   <img style="width:30%;" src="img/mrfbp_example.png">
 </p>
 
-<p>$$
-\mu_{i,j}(d) = \sum_{a \in D} f_{u,i}(a) \cdot f_{v,i}(a) \dots
-$$</p>
+<p>$$ \mu_{i,j}(d) = \sum_{a \in D} f_{u,i}(a) \cdot f_{v,i}(a) \dots $$</p>
 <hr />
-<p>Each vertex, $i$, can be associated with a random variable, $X_i$, taking
-on (discrete) values chosen from some domain $D = { d_0, d_1, \cdots, d_{m-1} }$ with
-a probability distribution function $g_i(\cdot)$.</p>
-<p>$$
-\mu_{i,j}^{t+1}(d) = \sum_{a \in D} f_{i,j}(a,d) \cdot g_i(a) \cdot \prod_{k \in N(i) \text{ \\ } j} \mu_{k,i}^{t}(a)
-$$</p>
-<p>$$
-P(X_i = a) \approx b^t_i(a) \propto g_i(a) \cdot \prod_{k \in N(i)} \mu^t_{k,i}(a)
-$$</p>
-<p>$$
-\sum_{b \in D} \mu_{i,j}^{t}(d) = 1,  \ \ \ \ \sum_{a \in D} b^t_i(a) = 1
-$$</p>
+<p>Each vertex, $i$, can be associated with a random variable, $X_i$, taking on (discrete) values chosen from some domain $D = { d_0, d_1, \cdots, d_{m-1} }$ with a probability distribution function $g_i(\cdot)$.</p>
+<p>$$ \mu_{i,j}^{t+1}(d) = \sum_{a \in D} f_{i,j}(a,d) \cdot g_i(a) \cdot \prod_{k \in N(i) \text{ \\ } j} \mu_{k,i}^{t}(a) $$</p>
+<p>$$ P(X_i = a) \approx b^t_i(a) \propto g_i(a) \cdot \prod_{k \in N(i)} \mu^t_{k,i}(a) $$</p>
+<p>$$ \sum_{b \in D} \mu_{i,j}^{t}(d) = 1, \ \ \ \ \sum_{a \in D} b^t_i(a) = 1 $$</p>
 <p>The product can be more compactly represented by a function $h^t_{i,j}(\cdot)$:</p>
-<p>$$
-h^t_{i,j}(a) = g_i(a) \cdot \prod_{k \in N(i) \text{\\} j } \mu^t_{k,i}(a)
-$$</p>
-<p>$$
-\mu_{i,j}^{t+1}(d) = \sum_{a \in D} f_{i,j}(a,d) \cdot h^t_{i,j}(a)
-$$</p>
+<p>$$ h^t_{i,j}(a) = g_i(a) \cdot \prod_{k \in N(i) \text{\\} j } \mu^t_{k,i}(a) $$</p>
+<p>$$ \mu_{i,j}^{t+1}(d) = \sum_{a \in D} f_{i,j}(a,d) \cdot h^t_{i,j}(a) $$</p>
 <p>One can recast this as a matrix multiplication:</p>
-<p>$$ \begin{bmatrix} f_{i,j}(d_0,d_0) &amp; f_{i,j}(d_1,d_0) &amp;  \cdots &amp; f_{i,j}(d_{m-1},d_0) \\ f_{i,j}(d_0,d_1) &amp; f_{i,j}(d_1,d_1) &amp;  \cdots &amp; f_{i,j}(d_{m-1},d_1) \\ \vdots  &amp; \vdots &amp; \ddots &amp; \vdots &amp; \\ f_{i,j}(d_0,d_{m-1}) &amp; f_{i,j}(d_1,d_{m-1}) &amp;  \cdots &amp; f_{i,j}(d_{m-1},d_{m-1}) \end{bmatrix} \begin{bmatrix} h_{i,j}^{t}(d_0) \\ h_{i,j}^{t}(d_1) \\ \vdots \\ h_{i,j}^{t}(d_{m-1}) \end{bmatrix} = \begin{bmatrix} \mu_{i,j}^{t+1}(d_0) \\ \mu_{i,j}^{t+1}(d_1) \\ \vdots \\ \mu_{i,j}^{t+1}(d_{m-1}) \end{bmatrix}
-$$</p>
-<p>$$
-\to F_{i,j} \cdot \vec{h}^t_{i,j} = \vec{\mu}^{t+1}_{i,j}
-$$</p>
+<p>$$ \begin{bmatrix} f_{i,j}(d_0,d_0) &amp; f_{i,j}(d_1,d_0) &amp; \cdots &amp; f_{i,j}(d_{m-1},d_0) \\ f_{i,j}(d_0,d_1) &amp; f_{i,j}(d_1,d_1) &amp; \cdots &amp; f_{i,j}(d_{m-1},d_1) \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \\ f_{i,j}(d_0,d_{m-1}) &amp; f_{i,j}(d_1,d_{m-1}) &amp; \cdots &amp; f_{i,j}(d_{m-1},d_{m-1}) \end{bmatrix} \begin{bmatrix} h_{i,j}^{t}(d_0) \\ h_{i,j}^{t}(d_1) \\ \vdots \\ h_{i,j}^{t}(d_{m-1}) \end{bmatrix} = \begin{bmatrix} \mu_{i,j}^{t+1}(d_0) \\ \mu_{i,j}^{t+1}(d_1) \\ \vdots \\ \mu_{i,j}^{t+1}(d_{m-1}) \end{bmatrix} $$</p>
+<p>$$ \to F_{i,j} \cdot \vec{h}^t_{i,j} = \vec{\mu}^{t+1}_{i,j} $$</p>
 <p>Since $h^t_{i,j}(\cdot)$ has no dependence on $b$, this speeds up a naive calculation by re-using the product results instead of re-calculating them.</p>
 <p>If the $F_{i,j}$ matrix has low rank, $r &lt; m$, it can be factored into a singular value decomposition (SVD) for performance:</p>
-<p>$$U \cdot S \cdot V = \begin{bmatrix} \vec u_0 &amp; \vec u_1 &amp; \cdots &amp; \vec u_{r-1} \end{bmatrix} \begin{bmatrix} s_0 &amp; 0 &amp;  \cdots &amp; 0 \\ 0 &amp; s_1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots  &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp;  \cdots &amp; s_{r-1} \end{bmatrix} \begin{bmatrix} \vec{v}^\dagger_0 \\ \vec{v}^\dagger_1 \\ \vdots \\ \vec{v}_{r-1}^\dagger  \end{bmatrix}
-$$</p>
+<p>$$U \cdot S \cdot V = \begin{bmatrix} \vec u_0 &amp; \vec u_1 &amp; \cdots &amp; \vec u_{r-1} \end{bmatrix} \begin{bmatrix} s_0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; s_1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; s_{r-1} \end{bmatrix} \begin{bmatrix} \vec{v}^\dagger_0 \\ \vec{v}^\dagger_1 \\ \vdots \\ \vec{v}_{r-1}^\dagger \end{bmatrix} $$</p>
 <p>Where $F_{i,j} = U \cdot S \cdot V$.</p>
 <p>The matrix multiplication that was $O(m^2)$ now becomes two matrix multiplications of order $O(r \cdot m)$ for a potential speedup of $\sim \frac{m}{r}$.</p>
-<p>Note that if the $F$ matrix has any symmetry, there are potential efficiency gains by exploiting that symmetry.
-In the above, when $F$ is of low rank, the SVD is exploiting the "symmetry' of having many zero eigenvalues.
-There is a well known optimization if the implied function has certain translational symmetry properties, allowing
-the multiplication to be done via a fast Fourier transform, producing an $O(m \lg m)$ calculation over the $O(m^2)$.</p>
+<p>Note that if the $F$ matrix has any symmetry, there are potential efficiency gains by exploiting that symmetry. In the above, when $F$ is of low rank, the SVD is exploiting the "symmetry' of having many zero eigenvalues. There is a well known optimization if the implied function has certain translational symmetry properties, allowing the multiplication to be done via a fast Fourier transform, producing an $O(m \lg m)$ calculation over the $O(m^2)$.</p>
 <hr />
 <h4 id="bethe-free-energy">Bethe Free Energy</h4>
 <p>(wip)</p>
-<p>Belief Propagation (BP) can be thought of as an algorithm that finds a fixed
-point of the Bethe Free Energy, $F_\beta$:</p>
-<p>$$
-\begin{array}{ll}
-\phi _ {i,j} (d _ 0, d _ 1 ) = &amp; f ( d _ 0, d _ 1 ) g ( d _ 0 ) g ( d _ 1 ) \
-b _ {i,j} (d _ 0,d _ 1)  = &amp; \alpha \phi _ {i,j} ( d _ 0, d _ 1 )  \prod _ { k \in N(i) / j } \mu _ {k,i} ( d_0) \prod _ { l \in N(j) / i } \mu _ {l,j} (d _ 1) \
-F _ {\beta} (f, g)  = &amp; \sum _ {i,j} \sum _ {d _ 0, d _ 1} b _ {i,j} ( d _ 0, d _ 1 ) [ \ln(b _ {i,j} (d _ 0, d _ 1 )) - \ln( \phi _ {i,j} ( d _ 0 ) ) ] \
- &amp; - \sum _ {i} (q _ i - 1) \sum _ d b _ i (d)  [ \ln ( b _ i ( d ) ) - \ln( g ( d ) ) ] 
-\end{array}
-$$</p>
-<p>Where $\alpha$ is a normalization constant, $q_i$ is the degree of the MRF variable at site $i$ and
-$f$, $g$, $b$ etc. are as above (pair wise function, singleton function, belief, etc.).</p>
+<p>Belief Propagation (BP) can be thought of as an algorithm that finds a fixed point of the Bethe Free Energy, $F_\beta$:</p>
+<p>$$ \begin{array}{ll} \phi _ {i,j} (d _ 0, d _ 1 ) = &amp; f ( d _ 0, d _ 1 ) g ( d _ 0 ) g ( d _ 1 ) \\ b _ {i,j} (d _ 0,d _ 1) = &amp; \alpha \phi _ {i,j} ( d _ 0, d _ 1 ) \prod _ { k \in N(i) / j } \mu _ {k,i} ( d_0) \prod _ { l \in N(j) / i } \mu _ {l,j} (d _ 1) \\ F _ {\beta} (f, g) = &amp; \sum _ {i,j} \sum _ {d _ 0, d _ 1} b _ {i,j} ( d _ 0, d _ 1 ) [ \ln(b _ {i,j} (d _ 0, d _ 1 )) - \ln( \phi _ {i,j} ( d _ 0 ) ) ] \\ &amp; - \sum _ {i} (q _ i - 1) \sum _ d b _ i (d) [ \ln ( b _ i ( d ) ) - \ln( g ( d ) ) ] \end{array} $$</p>
+<p>Where $\alpha$ is a normalization constant, $q_i$ is the degree of the MRF variable at site $i$ and $f$, $g$, $b$ etc. are as above (pair wise function, singleton function, belief, etc.).</p>
 <p>Imposing the constraints:</p>
-<p>$$
-\begin{array}{l}
-\sum _ d b _ i (d) = 1 \
-\sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) = b _ j ( d _ 1 )
-\end{array}
-$$</p>
-<p>Allows us to use Lagrange multipliers $\lambda _ {i,j} ( d )$ for the
-$\sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) = b _ j ( d _ 1 )$ constraint,
-$\gamma _ i$ for the $\sum _ d b _ i (d) = 1$ constraint and $\gamma _ {i,j}$
-for the $\sum _ {d} \mu _ {i,j} (d) = 1$ constraint:</p>
-<p>$$
-\begin{array}{ll}
-L = &amp; F _ {\beta} \
- &amp; - \lambda _ {i,j} (d_1) \left[ \left( \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) \right) - b _ j ( d _ 1 ) \right] \
- &amp; - \gamma _ i \left[ \sum _ d b _ i (d) - 1 \right] \
- &amp; - \gamma _ {i,j} \left[ \sum _ {d} \mu _ {i,j} (d) - 1 \right] \
-\end{array}
-$$</p>
-<p>$$
-\begin{array}{rl}
-\frac{ \partial L }{ \partial b _ {i,j} ( d _ 0, d _ 1 ) }  = &amp; 0 \
-\to &amp; \ln b _ {i,j} (d _ 0, d _ 1) = \ln( \phi _ {i,j} (d _ 0, d _ 1) ) + \lambda _ {i,j}(d _ 1) + \lambda _ {j,i}(d _ 0) + \gamma _ {i,j} - 1 \
-\frac{ \partial L }{ \partial b _ i (d _ 0) }  = &amp; 0 \
-\to &amp; (q _ i - 1)( \ln b _ i ( d _ 0 ) + 1)  = \ln g ( d _ 0) + \sum _ {j \in N(i) } \lambda _ {j,i} (d _ 1) + \gamma _ i \
-\lambda _ {i,j} ( d _ 1 ) = &amp; \ln \prod _ {k \in N(j) / i } \mu _ {k,j} ( d _ 1 )  \
-\to &amp; ???
-\end{array}
-$$</p>
+<p>$$ \begin{array}{l} \sum _ d b _ i (d) = 1 \\ \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) = b _ j ( d _ 1 ) \end{array} $$</p>
+<p>Allows us to use Lagrange multipliers $\lambda _ {i,j} ( d )$ for the $\sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) = b _ j ( d _ 1 )$ constraint, $\gamma _ i$ for the $\sum _ d b _ i (d) = 1$ constraint and $\gamma _ {i,j}$ for the $\sum _ {d} \mu _ {i,j} (d) = 1$ constraint:</p>
+<p>$$ \begin{array}{ll} L = &amp; F _ {\beta} \\ &amp; - \lambda _ {i,j} (d_1) \left[ \left( \sum _ { d _ 0 } b _ {i,j} ( d _ 0, d _ 1 ) \right) - b _ j ( d _ 1 ) \right] \\ &amp; - \gamma _ i \left[ \sum _ d b _ i (d) - 1 \right] \\ &amp; - \gamma _ {i,j} \left[ \sum _ {d} \mu _ {i,j} (d) - 1 \right] \\ \end{array} $$</p>
+<p>$$ \begin{array}{rl} \frac{ \partial L }{ \partial b _ {i,j} ( d _ 0, d _ 1 ) } = &amp; 0 \\ \to &amp; \ln b _ {i,j} (d _ 0, d _ 1) = \ln( \phi _ {i,j} (d _ 0, d _ 1) ) + \lambda _ {i,j}(d _ 1) + \lambda _ {j,i}(d _ 0) + \gamma _ {i,j} - 1 \\ \frac{ \partial L }{ \partial b _ i (d _ 0) } = &amp; 0 \\ \to &amp; (q _ i - 1)( \ln b _ i ( d _ 0 ) + 1) = \ln g ( d _ 0) + \sum _ {j \in N(i) } \lambda _ {j,i} (d _ 1) + \gamma _ i \\ \lambda _ {i,j} ( d _ 1 ) = &amp; \ln \prod _ {k \in N(j) / i } \mu _ {k,j} ( d _ 1 ) \\ \to &amp; ??? \end{array} $$</p>
 <h4 id="sum-product-belief-propagation">Sum-Product Belief Propagation</h4>
-<p>$$
-G(V,E)
-$$</p>
-<p>$$
-s, t \in V, x_{*} \in S = { s_0, s_1, \cdots, s_{n-1} }
-$$</p>
-<p>$$
-\mu_{s \to t}(x_t) = \sum_{x_s} [ \phi_{s t}(x_s,x_t) \prod_{u \in N(s) / t} \mu_{u \to s} (x_s) ] 
-$$
-$$
-b_t(x_t)  \propto \prod_{s \in N(t)} \mu_{t \to s}(x_s)
-$$</p>
+<p>$$ G(V,E) $$</p>
+<p>$$ s, t \in V, x_{*} \in S = { s_0, s_1, \cdots, s_{n-1} } $$</p>
+<p>$$ \mu_{s \to t}(x_t) = \sum_{x_s} [ \phi_{s t}(x_s,x_t) \prod_{u \in N(s) / t} \mu_{u \to s} (x_s) ] $$ $$ b_t(x_t) \propto \prod_{s \in N(t)} \mu_{t \to s}(x_s) $$</p>
 <ul>
 <li>$s,t$ - verticies in the graph ($s,t \in V$)</li>
 <li>$x_s, x_t \in S$ - values at the vertices (one of a discrete set of values from $S = { s_0, s_1, \cdots, s_{n-1} }$)</li>
@@ -235,34 +138,23 @@ $$</p>
     D - E
 </code></pre>
 <h2 id="literature-notes">Literature Notes</h2>
-<p>This is a bit outside the scope of this document but I should take some notes on the various "state of the art" techniques
-from about a decade or more ago.</p>
+<p>This is a bit outside the scope of this document but I should take some notes on the various "state of the art" techniques from about a decade or more ago.</p>
 <h4 id="fast-belief-propagation-for-early-vision">Fast Belief Propagation for Early Vision</h4>
 <ul>
 <li><a href="https://www.cs.cornell.edu/~dph/papers/bp-cvpr.pdf">paper</a></li>
 <li><a href="https://www.youtube.com/watch?v=nZ2uo-7TDDc">talk</a></li>
 </ul>
-<p>The basic idea is that for problems with structure, many speedups can be had exploiting the
-symmetry or simplicity of the label-to-label cost function, locality of labels or other factors.</p>
+<p>The basic idea is that for problems with structure, many speedups can be had exploiting the symmetry or simplicity of the label-to-label cost function, locality of labels or other factors.</p>
 <p>The paper and talk focus on using loopy belief propagation (LBP) for stereo problems.</p>
 <ul>
-<li>Using linear or quadratic (truncated) label cost functions, you can go from $O(B^2)$ to $O(B)$ by
-  various tricks</li>
-<li>Using a virtual hierarchy of nodes, you can compute initial messages and beliefs and then propagate
-  those out to the nodes underneath (wholesale) to get faster convergence</li>
+<li>Using linear or quadratic (truncated) label cost functions, you can go from $O(B^2)$ to $O(B)$ by various tricks</li>
+<li>Using a virtual hierarchy of nodes, you can compute initial messages and beliefs and then propagate those out to the nodes underneath (wholesale) to get faster convergence</li>
 </ul>
-<p>A point that doesn't really seem to be addressed is that this assumes the labels have locality or "cohesion" in
-that if you find one label somewhere, the chance of finding a similar label nearby is higher.
-This assumption is obvious if you're doing stereo matching or motion estimation but for general problems
-this is not the case and it's not clear that this method will do better (and might even perform worse?).</p>
+<p>A point that doesn't really seem to be addressed is that this assumes the labels have locality or "cohesion" in that if you find one label somewhere, the chance of finding a similar label nearby is higher. This assumption is obvious if you're doing stereo matching or motion estimation but for general problems this is not the case and it's not clear that this method will do better (and might even perform worse?).</p>
 <p>Some other random notes:</p>
 <ul>
-<li>Can do 'checkerboard' updates to get half the memory and twice the speed with similar or the same
-  convergence (guaranteed? empirical?)</li>
-<li>Other methods that try to make 'superblocks' change the graph and potentially reduce the node and edge
-  count but at the cost of exploding the label state space, which becomes a Cartesian product. Huttenlocher
-  talks about how the superblocks (generalized belief propagation (GBP)?) idea wasn't meant to make it
-  more efficient but was done for other, theoretical, reasons</li>
+<li>Can do 'checkerboard' updates to get half the memory and twice the speed with similar or the same convergence (guaranteed? empirical?)</li>
+<li>Other methods that try to make 'superblocks' change the graph and potentially reduce the node and edge count but at the cost of exploding the label state space, which becomes a Cartesian product. Huttenlocher talks about how the superblocks (generalized belief propagation (GBP)?) idea wasn't meant to make it more efficient but was done for other, theoretical, reasons</li>
 </ul>
 <h4 id="scalable-detection-of-statistically-significant-communities-and-hierarchies-using-message-passing-for-modularity">Scalable detection of statistically significant communities and hierarchies, using message passing for modularity</h4>
 <ul>
@@ -273,17 +165,9 @@ this is not the case and it's not clear that this method will do better (and mig
 <ul>
 <li><a href="http://proceedings.mlr.press/v9/chechetka10a/chechetka10a.pdf">paper</a></li>
 </ul>
-<p>This builds on an idea of residual belief propagation (RBP) by Elidan et all that updates only one message per
-time step based on the difference of the messages, called the "residual".
-The idea is that one can weight message updates by a better heuristic than the residual, namely
-a "path sensitivity".</p>
-<p>The path sensitivity attempts to measure the effect of changing/updating one message on another and then
-picking a message to update that has maximal path sensitivity.
-Doing this wholesale and in general is as bad or worse then just running LBP but various heuristics
-can be used to estimate the path sensitivity which are more efficient than a wholesale recalculation.</p>
-<p>Other tricks need to be employed in order to make the algorithm "anytime", where an "anytime" algorithm
-can be stopped at anytime and still get a good estimate of the answer (maximum a posteriori (MAP) or distribution
-on end state).</p>
+<p>This builds on an idea of residual belief propagation (RBP) by Elidan et all that updates only one message per time step based on the difference of the messages, called the "residual". The idea is that one can weight message updates by a better heuristic than the residual, namely a "path sensitivity".</p>
+<p>The path sensitivity attempts to measure the effect of changing/updating one message on another and then picking a message to update that has maximal path sensitivity. Doing this wholesale and in general is as bad or worse then just running LBP but various heuristics can be used to estimate the path sensitivity which are more efficient than a wholesale recalculation.</p>
+<p>Other tricks need to be employed in order to make the algorithm "anytime", where an "anytime" algorithm can be stopped at anytime and still get a good estimate of the answer (maximum a posteriori (MAP) or distribution on end state).</p>
 <h4 id="parallel-splash-belief-propagation">Parallel Splash Belief Propagation</h4>
 <ul>
 <li><a href="https://www.ml.cmu.edu/research/dap-papers/dap-gonzalez.pdf">paper</a></li>
@@ -291,47 +175,13 @@ on end state).</p>
 </ul>
 <p>The idea is to create a minimum spanning tree (MST) to schedule the BP messages.</p>
 <h4 id="speculation">Speculation</h4>
-<p>Some thoughts on how to add heuristics or optimizations.
-These are completely speculative and untested so should be thought of as
-rough notes or thoughts.</p>
-<p>Consider a tileset consisting of three groups, which will be called 'red', 'green' and 'blue'.
-Each group has the same type of tiles (endpoint, road, bend) but can only attach to other tiles
-of its same color.
-A constrained grid is created by putting two endpoints of each color on either side of the grid
-and removing all endpoints from the rest of the grid, forcing a condition where only a single
-road from one endpoint color to its corresponding endpoint colored tile is a feasible solution.</p>
-<p>In other words, try to find a solution of three self avoiding walks with giving endpoints.
-BP has no concept of "self avoiding walk" (SAW) and the fact that these are SAWs is a layer
-of interpretation we impose after the fact.
-The SAWs are embedded in the tiles present in the grid and the admissible tile pairs from the
-$f(\cdot)$ function.
-For convenience, we might talk about the SAW as a convenience with the understanding that the
-SAW itself is not present as a concept in BP.</p>
-<p>One observation is that if the endpoints are too far apart, the SAW meanders from one of it's initial
-position.
-There looks to be a weak "pull" in the direction of the endpoint, which gets stronger as the grid
-gets filled out with choice, but the meandering can also lead to the SAW backing itself into a dead-end
-and failing to find a realization.
-In tests, setting the error to be extremely low (thus increasing the simulation steps) the realization
-is more consistently found (in the test case of <code>11x11x3</code>).
-Were the grid larger, no doubt the meandering would not be as bad as, by chance, the SAWs might have
-a reasonable chance of connecting or, when they get close to each other, might be close enough to have
-BP kick in and nudge them towards each other.</p>
-<p>Though I lack the language or understanding to quantify what's going on well, it looks like there's a kind
-of "mean field" quality to BP, where it's good at understanding what the constraints should be in a kind
-of "average" sense (for some definition of "average) with it potentially understanding and overcoming
-some local constraints, but it loosing its context on constraints or correlations that happen over
-larger distances.</p>
-<p>To overcome this effect, one can try and come up with heuristics that allow for those longer length
-constraints to be more apparent, especially when they're so strong as to lead to contradictions
-if they're not met.</p>
-<p>One idea is to chop up sections grid (in <code>3x3x3</code> sections, say) with outside boundary conditions
-on all but one edge, join them to another chopped section and see if a solution can
-be found (by running BP, sampling with MCMC or some other method).
-If a solution is always/almost always found and not found either when attached to other segments
-or in isolation, then use that information to try and correlate "key" tiles inside.
-This correlation can be used to modify the single tile probability function ( $g (\cdot )$ )
-do heuristically prefer these tiles when running BP proper.</p>
+<p>Some thoughts on how to add heuristics or optimizations. These are completely speculative and untested so should be thought of as rough notes or thoughts.</p>
+<p>Consider a tileset consisting of three groups, which will be called 'red', 'green' and 'blue'. Each group has the same type of tiles (endpoint, road, bend) but can only attach to other tiles of its same color. A constrained grid is created by putting two endpoints of each color on either side of the grid and removing all endpoints from the rest of the grid, forcing a condition where only a single road from one endpoint color to its corresponding endpoint colored tile is a feasible solution.</p>
+<p>In other words, try to find a solution of three self avoiding walks with giving endpoints. BP has no concept of "self avoiding walk" (SAW) and the fact that these are SAWs is a layer of interpretation we impose after the fact. The SAWs are embedded in the tiles present in the grid and the admissible tile pairs from the $f(\cdot)$ function. For convenience, we might talk about the SAW as a convenience with the understanding that the SAW itself is not present as a concept in BP.</p>
+<p>One observation is that if the endpoints are too far apart, the SAW meanders from one of it's initial position. There looks to be a weak "pull" in the direction of the endpoint, which gets stronger as the grid gets filled out with choice, but the meandering can also lead to the SAW backing itself into a dead-end and failing to find a realization. In tests, setting the error to be extremely low (thus increasing the simulation steps) the realization is more consistently found (in the test case of <code>11x11x3</code>). Were the grid larger, no doubt the meandering would not be as bad as, by chance, the SAWs might have a reasonable chance of connecting or, when they get close to each other, might be close enough to have BP kick in and nudge them towards each other.</p>
+<p>Though I lack the language or understanding to quantify what's going on well, it looks like there's a kind of "mean field" quality to BP, where it's good at understanding what the constraints should be in a kind of "average" sense (for some definition of "average) with it potentially understanding and overcoming some local constraints, but it loosing its context on constraints or correlations that happen over larger distances.</p>
+<p>To overcome this effect, one can try and come up with heuristics that allow for those longer length constraints to be more apparent, especially when they're so strong as to lead to contradictions if they're not met.</p>
+<p>One idea is to chop up sections grid (in <code>3x3x3</code> sections, say) with outside boundary conditions on all but one edge, join them to another chopped section and see if a solution can be found (by running BP, sampling with MCMC or some other method). If a solution is always/almost always found and not found either when attached to other segments or in isolation, then use that information to try and correlate "key" tiles inside. This correlation can be used to modify the single tile probability function ( $g (\cdot )$ ) do heuristically prefer these tiles when running BP proper.</p>
 <p>As an example, consider this ASCII map:</p>
 <pre><code>,    ,    ,    ,    ,    .    ,    ,    ,    ,    ,
 ,    S    ,    ,    ,    .    ,    ,    ,    E    ,
@@ -345,8 +195,7 @@ do heuristically prefer these tiles when running BP proper.</p>
 ,    ,    ,    ,    ,    [.-] ,    ,    ,    ,    ,
 ,    ,    ,    ,    ,    .    ,    ,    ,    ,    ,
 </code></pre>
-<p>Where <code>.</code> is the empty tile, <code>,</code> has choices of the empty, bend or road tiles, <code>S</code>, <code>E</code> are the start/end tiles (suitably
-rotated) and <code>[.-]</code> have only two choices, either the road or empty tile.</p>
+<p>Where <code>.</code> is the empty tile, <code>,</code> has choices of the empty, bend or road tiles, <code>S</code>, <code>E</code> are the start/end tiles (suitably rotated) and <code>[.-]</code> have only two choices, either the road or empty tile.</p>
 <p>So the only solution is a SAW from <code>S</code> to <code>E</code> through <code>[.-]</code>, with the choice of <code>-</code> needed to not end up in a contradiction.</p>
 <p>So as a guess, let's try using a <code>3x3</code> grid around the <code>S</code> tile and pairing it with some of the other chopped sections:</p>
 <p>Configuration <code>SE</code>:</p>
@@ -391,49 +240,16 @@ rotated) and <code>[.-]</code> have only two choices, either the road or empty t
 .    ,    ,    ,    ,    .    ,    ,
 .    .    .    .    .    .    .    .
 </code></pre>
-<p>So now we observe that <code>SE</code> has a valid realization
-whereas <code>SB</code> doesn't.
-<code>SB+</code> has a valid realization that falls off the right end.
-<code>SM</code> fails whereas <code>SM+</code> succeeds as in the <code>SB+</code> case, with the
-path continuing over the right edge.
-<code>SW+</code> also can't find a realization, even though the right hand
-side of the <code>W</code> tile is open.</p>
-<p>If we're able to do this 'blocking' and do some cataloging of
-which blocks can be joined together, with various boundary
-conditions set, we might be able to deduce some tiles are
-heavily dependent on others.</p>
-<p>There are many assumptions underneath this, some apparent and
-some potentially less so.
-One is that there's a kind symmetry, either translational or
-scale, that underlies some of these assumptions.
-Another is that some simple path heuristic will help, or
-that the 'meandering' nature of the search is something to mitigate against.</p>
-<p>One thought is to extend a minimum spanning tree from a particular point
-(say <code>S</code>) through the whole grid, not allowing it to pass through cells that
-are fixed or have tiles that aren't from some set of admissible values (determined
-somehow by the correlation 'chopping' above?).
-One can then run BP on this implied tree directly and/or somehow use the MST to
-modulate the probabilities of the admissible set.</p>
-<p>Min-cut of the graph also gives some indication of the importance of
-certain cells.</p>
+<p>So now we observe that <code>SE</code> has a valid realization whereas <code>SB</code> doesn't. <code>SB+</code> has a valid realization that falls off the right end. <code>SM</code> fails whereas <code>SM+</code> succeeds as in the <code>SB+</code> case, with the path continuing over the right edge. <code>SW+</code> also can't find a realization, even though the right hand side of the <code>W</code> tile is open.</p>
+<p>If we're able to do this 'blocking' and do some cataloging of which blocks can be joined together, with various boundary conditions set, we might be able to deduce some tiles are heavily dependent on others.</p>
+<p>There are many assumptions underneath this, some apparent and some potentially less so. One is that there's a kind symmetry, either translational or scale, that underlies some of these assumptions. Another is that some simple path heuristic will help, or that the 'meandering' nature of the search is something to mitigate against.</p>
+<p>One thought is to extend a minimum spanning tree from a particular point (say <code>S</code>) through the whole grid, not allowing it to pass through cells that are fixed or have tiles that aren't from some set of admissible values (determined somehow by the correlation 'chopping' above?). One can then run BP on this implied tree directly and/or somehow use the MST to modulate the probabilities of the admissible set.</p>
+<p>Min-cut of the graph also gives some indication of the importance of certain cells.</p>
 <hr />
 <p>Some more off-the-cuff remarks.</p>
-<p>We might care about "topological" ordering of critical tiles or regions.
-We can potentially get away with looking at "critical" tiles or regions
-because of some underlying symmetry that allows us to compress the
-spatial region between these areas of interest.</p>
-<p>For example, in the above, we might care about an ordering that
-puts <code>S - [.-] - E</code>, potentially even <code>S &gt; [.-] &gt; E</code> or <code>S &lt; [.-] &lt; E</code>
-if we're clever.
-We might notice that the <code>S</code>, <code>[.-]</code> and <code>E</code> tiles/cells are the "critical"
-ones (that is, they're highly correlated and/or dependent on one another
-for a successful realization) and that the regions between the <code>S</code>, <code>[.-]</code>
-pair and the <code>[.-]</code>, <code>E</code> pair have a kind of translational symmetry in that
-all tiles between them are homogeneous and so can be represented by an
-exemplar tile/cell.</p>
-<p>With this reduction, we might be able to solve a smaller problem, something
-like <code>S , [.-] , E</code>, deducing the <code>[.-]</code> should be <code>-</code> and then backing out
-and filling in the larger grid.</p>
+<p>We might care about "topological" ordering of critical tiles or regions. We can potentially get away with looking at "critical" tiles or regions because of some underlying symmetry that allows us to compress the spatial region between these areas of interest.</p>
+<p>For example, in the above, we might care about an ordering that puts <code>S - [.-] - E</code>, potentially even <code>S &gt; [.-] &gt; E</code> or <code>S &lt; [.-] &lt; E</code> if we're clever. We might notice that the <code>S</code>, <code>[.-]</code> and <code>E</code> tiles/cells are the "critical" ones (that is, they're highly correlated and/or dependent on one another for a successful realization) and that the regions between the <code>S</code>, <code>[.-]</code> pair and the <code>[.-]</code>, <code>E</code> pair have a kind of translational symmetry in that all tiles between them are homogeneous and so can be represented by an exemplar tile/cell.</p>
+<p>With this reduction, we might be able to solve a smaller problem, something like <code>S , [.-] , E</code>, deducing the <code>[.-]</code> should be <code>-</code> and then backing out and filling in the larger grid.</p>
 <p>Some examples to consider:</p>
 <pre><code>,    ,    ,    ,    ,    .    ,    ,    ,    ,    ,
 ,    S0   ,    ,    ,   [.-_] ,    ,    ,    E1   ,
@@ -447,10 +263,7 @@ and filling in the larger grid.</p>
 ,    S1   ,    ,    ,   [.-_] ,    ,    ,    E0   ,
 ,    ,    ,    ,    ,    .    ,    ,    ,    ,    ,
 </code></pre>
-<p>Where <code>-</code> and <code>_</code> are roads for <code>0</code> and <code>1</code> groups respectively.
-This may be too restrictive, even if still possible,
-so one could imagine a third dimension to allow the paths
-to "jump" over each other in the extra dimension.</p>
+<p>Where <code>-</code> and <code>_</code> are roads for <code>0</code> and <code>1</code> groups respectively. This may be too restrictive, even if still possible, so one could imagine a third dimension to allow the paths to "jump" over each other in the extra dimension.</p>
 <pre><code>,    ,    ,    .    ,    .    ,    ,    ,    ,    ,
 ,    S    ,    .    ,   [.-_] ,    ,    ,    E    ,
 ,    ,    ,    .    ,    .    ,    ,    ,    ,    ,
@@ -463,97 +276,42 @@ to "jump" over each other in the extra dimension.</p>
 ,    ,    ,   [.-]  ,    ,    ,    .    ,    ,    ,
 ,    ,    ,    .    ,    ,    ,    .    ,    ,    ,
 </code></pre>
-<p>Where the path has to loop "back" before going through the
-other choke point.</p>
-<p>Assuming one can identify "constrained" tiles, then
-doing all pairs shortest path, by some energy metric
-to extend paths, is at least a proof of concept
-to allow a topological graph to be superimposed
-over the tiles in question.</p>
+<p>Where the path has to loop "back" before going through the other choke point.</p>
+<p>Assuming one can identify "constrained" tiles, then doing all pairs shortest path, by some energy metric to extend paths, is at least a proof of concept to allow a topological graph to be superimposed over the tiles in question.</p>
 <p>So, as a rough first pass at a heuristic extension:</p>
 <ul>
-<li>Chop up the grid into larger blocks, <code>3x3x3</code> say:</li>
-<li>shove blocks together with various boundary conditions
-    and run a small BP algorithm on them to determine
-    which blocks are admissible and get an indication
-    of which tiles within the block are dependent/correlated
-    with each other</li>
-<li>From the list of flagged tiles (tiles that are either constrained,
-  flagged as important or whatever else), run an all pairs
-  shortest path, choosing some "background" tile as
-  the 0 energy cost path (for example, the <code>,</code> tile above)</li>
-<li>From the all pairs shortest path, construct an induced
-  graph that gives a topological description of which
-  tiles are neighbors</li>
-<li>From the topological induced graph, run BP, under some
-  canonical cell construction or description, to determine,
-  either directly or by weighting the individual tile
-  probability, which tiles should be chosen from the
-  constrained set.</li>
+<li>Chop up the grid into larger blocks, <code>3x3x3</code> say:
+<ul>
+<li>shove blocks together with various boundary conditions and run a small BP algorithm on them to determine which blocks are admissible and get an indication of which tiles within the block are dependent/correlated with each other</li>
+</ul></li>
+<li>From the list of flagged tiles (tiles that are either constrained, flagged as important or whatever else), run an all pairs shortest path, choosing some "background" tile as the 0 energy cost path (for example, the <code>,</code> tile above)</li>
+<li>From the all pairs shortest path, construct an induced graph that gives a topological description of which tiles are neighbors</li>
+<li>From the topological induced graph, run BP, under some canonical cell construction or description, to determine, either directly or by weighting the individual tile probability, which tiles should be chosen from the constrained set.</li>
 </ul>
 <hr />
 <h2 id="appendix">Appendix</h2>
 <h4 id="mutual-information">Mutual information</h4>
-<p>$$
-\begin{align}
-I(X;Y) &amp; = D_{KL}(p_{X,Y} || p_X \cdot p_Y ) \
- &amp; = \sum_{x \in X} \sum_{y \in Y} P_{X,Y}(x,y) \ln( \frac{P_{X,Y}(x,y)}{P_X(x) P_Y(y)} )
-\end{align}
-$$</p>
+<p>$$ \begin{align} I(X;Y) &amp; = D_{KL}(p_{X,Y} || p_X \cdot p_Y ) \\ &amp; = \sum_{x \in X} \sum_{y \in Y} P_{X,Y}(x,y) \ln( \frac{P_{X,Y}(x,y)}{P_X(x) P_Y(y)} ) \end{align} $$</p>
 <p>For $p_X$ and $p_y$ independent, this reduces to:</p>
-<p>$$
-\sum_{x \in X} \sum_{y \in Y} P_{X,Y}(x,y) \ln( \frac{P_X(x) P_Y(y)}{P_X(x) P_Y(y)} ) = 0
-$$</p>
+<p>$$ \sum_{x \in X} \sum_{y \in Y} P_{X,Y}(x,y) \ln( \frac{P_X(x) P_Y(y)}{P_X(x) P_Y(y)} ) = 0 $$</p>
 <p>For $X = Y$, this reduces to:</p>
-<p>$$
-\begin{align}
-&amp;  \sum_{x \in X} \sum_{y \in X} P_{X,X}(x,y) \ln( \frac{P_{X,X}(x,y) }{P_X(x) P_X(y)} ) \
-= &amp; \sum_{x \in X} P_X(x) \ln( \frac{P_X(x) }{P_X(x) P_X(x)} ) \
-= &amp; - \sum_{x \in X} P_X(x) \ln( P_X(x) ) \
-\end{align}
-$$</p>
+<p>$$ \begin{align} &amp; \sum_{x \in X} \sum_{y \in X} P_{X,X}(x,y) \ln( \frac{P_{X,X}(x,y) }{P_X(x) P_X(y)} ) \\ = &amp; \sum_{x \in X} P_X(x) \ln( \frac{P_X(x) }{P_X(x) P_X(x)} ) \\ = &amp; - \sum_{x \in X} P_X(x) \ln( P_X(x) ) \ \end{align} $$</p>
 <p>which is just the entropy of $X$.</p>
 <h4 id="free-energy">Free Energy</h4>
 <p>Consider ...</p>
 <h4 id="belief-propagation-on-trees">Belief Propagation on Trees</h4>
-<p>Belief propagation is exact on trees.
-The algorithm is roughly as follows:</p>
+<p>Belief propagation is exact on trees. The algorithm is roughly as follows:</p>
 <ul>
 <li>Assign a privileged non-leaf node as the root</li>
-<li>Starting from the leaf nodes inwards to the root, calculate
-  the marginal probability in a breadth first seach way</li>
-<li>Once the maximum a posteriori (MAP) is calculated for the root node,
-  work outward from the root back to the leaves to calculate the true
-  marginals</li>
+<li>Starting from the leaf nodes inwards to the root, calculate the marginal probability in a breadth first seach way</li>
+<li>Once the maximum a posteriori (MAP) is calculated for the root node, work outward from the root back to the leaves to calculate the true marginals</li>
 </ul>
-<p>The analogy to string matching is that to find a concrete alignment, one
-must first find the global score, then work backwards from the score
-to find a string alignment.
-In this case, BP on a tree must find the MAP and then work backwards,
-filling in the individual variable estimates once the MAP has been calculated.</p>
-<p><img alt="bp tree example" src="src/bp-tree-example.svg" /></p>
-<p>Call the join probability distribution function $f(\cdot,\cdot)$ with
-each node taking on one of $D$ possible values.
-For concreteness, the joint distribution is the same regardless of the
-node pairs in question (sort of a homogeniety condition), with each
-node drawn from the same domain of integers from $[0, D-1]$.</p>
-<p>Starting at the leaves and working inwards, we introduce temporary
-functions $u_i(\cdot)$:</p>
-<p>$$
-\begin{align}
-u_0 ( v_6 ) &amp; = \sum _ { v_0 = 0 } ^ { D - 1 } f( v_0, v_6 ) \
-u_1 ( v_6 ) &amp; = \sum _ { v_1 = 0 } ^ { D - 1 } f( v_1, v_6 ) \
-u_2 ( v_5 ) &amp; = \sum _ { v_2 = 0 } ^ { D - 1 } f( v_2, v_5 ) \
-u_3 ( v_5 ) &amp; = \sum _ { v_3 = 0 } ^ { D - 1 } f( v_2, v_5 ) \
-u_4 ( v_5 ) &amp; = \sum _ { v_4 = 0 } ^ { D - 1 } f( v_4, v_5 ) \
-u_6 ( v_7 ) &amp; = \sum _ { v_6 = 0 } ^ { D - 1 } f( v_6, v_7 ) \cdot u_0(v_6) \cdot u_1(v_6) \
-u_5 ( v_7 ) &amp; = \sum _ { v_5 = 0 } ^ { D - 1 } f( v_5, v_7 ) \cdot u_3(v_5) \cdot u_4(v_5) \
-u_7 &amp; = \sum _ { v_7 = 0 } ^ { D - 1 } u_6(v_7) \cdot u_5(v_7)
-\end{align}
-$$</p>
-<p>$u_7$ now holds the calculated MAP for the example graph.
-Once we have the MAP for $u_7$, and thus the whole graph, we can then use it to inform the rest of the
-nodes by </p>
+<p>The analogy to string matching is that to find a concrete alignment, one must first find the global score, then work backwards from the score to find a string alignment. In this case, BP on a tree must find the MAP and then work backwards, filling in the individual variable estimates once the MAP has been calculated.</p>
+<p><img src="src/bp-tree-example.svg" alt="bp tree example" /></p>
+<p>Call the join probability distribution function $f(\cdot,\cdot)$ with each node taking on one of $D$ possible values. For concreteness, the joint distribution is the same regardless of the node pairs in question (sort of a homogeniety condition), with each node drawn from the same domain of integers from $[0, D-1]$.</p>
+<p>Starting at the leaves and working inwards, we introduce temporary functions $u_i(\cdot)$:</p>
+<p>$$ \begin{align} u_0 ( v_6 ) &amp; = \sum _ { v_0 = 0 } ^ { D - 1 } f( v_0, v_6 ) \\ u_1 ( v_6 ) &amp; = \sum _ { v_1 = 0 } ^ { D - 1 } f( v_1, v_6 ) \\ u_2 ( v_5 ) &amp; = \sum _ { v_2 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\ u_3 ( v_5 ) &amp; = \sum _ { v_3 = 0 } ^ { D - 1 } f( v_2, v_5 ) \\ u_4 ( v_5 ) &amp; = \sum _ { v_4 = 0 } ^ { D - 1 } f( v_4, v_5 ) \\ u_6 ( v_7 ) &amp; = \sum _ { v_6 = 0 } ^ { D - 1 } f( v_6, v_7 ) \cdot u_0(v_6) \cdot u_1(v_6) \\ u_5 ( v_7 ) &amp; = \sum _ { v_5 = 0 } ^ { D - 1 } f( v_5, v_7 ) \cdot u_3(v_5) \cdot u_4(v_5) \\ u_7 &amp; = \sum _ { v_7 = 0 } ^ { D - 1 } u_6(v_7) \cdot u_5(v_7) \end{align} $$</p>
+<p>$u_7$ now holds the calculated MAP for the example graph. Once we have the MAP for $u_7$, and thus the whole graph, we can then use it to inform the rest of the nodes by</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Island_algorithm">Island algorithm</a></li>
@@ -569,6 +327,7 @@ nodes by </p>
 </ul>
 <h6 id="2022-08-16">2022-08-16</h6>
 
+
       </section>
 
       <!--
@@ -578,6 +337,6 @@ nodes by </p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

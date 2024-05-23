@@ -101,7 +101,7 @@ With this in mind, the probability becomes:
 
 $$
 \begin{align}
-P(r) & = \sum_{k=1}^{n} \Pr \\{ \text{ candidate k chosen } \& \text{ candidate k is best } \\} \\\\
+P(r) & = \sum_{k=1}^{n} \Pr \\{ \text{ candidate k chosen } \\& \text{ candidate k is best } \\} \\\\
  & = \sum_{k=1}^{n} \Pr \\{ \text{ next best candidate in} \in [1 \dots r] | \text{ candidate k is best } \\} \\\\
  & = \sum_{k=r+1}^{n} \frac{r}{k-1} \cdot \frac{1}{n} \\\\
  & = \frac{r}{n} \sum_{k=r}^{n-1} \frac{1}{k} \\\\

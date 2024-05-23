@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -52,15 +52,13 @@
       <section>
 
         <h2 id="gcode-conversion-tools">GCode Conversion Tools</h2>
-<p>At one point, I had good success with an Inkscape plugin called <a href="http://www.cnc-club.ru/forum/viewtopic.php?t=35">Gcodetools</a> but
-it seems to have succumbed to bit-rot and doesn't work on my current Ubuntu installation (16.04).</p>
-<p>I'm settling on a rough toolchain that takes some base format (PostScript/PDF/SVG/etc.), converts
-to "GNUPlot format" then converts to GCocde.</p>
+<p>At one point, I had good success with an Inkscape plugin called <a href="http://www.cnc-club.ru/forum/viewtopic.php?t=35">Gcodetools</a> but it seems to have succumbed to bit-rot and doesn't work on my current Ubuntu installation (16.04).</p>
+<p>I'm settling on a rough toolchain that takes some base format (PostScript/PDF/SVG/etc.), converts to "GNUPlot format" then converts to GCocde.</p>
 <h2 id="basic-workflow">Basic Workflow</h2>
 <ul>
-<li><code>Orig -&gt; SVG</code>   Create object in whatever tool and export to SVG</li>
-<li><code>SVG  -&gt; PS</code>    Use <code>rsvg-convert</code> to convert from SVG to PostScript</li>
-<li><code>PS   -&gt; GP</code>    Use <code>pstoedit</code> to convert to "gnuplot" polygon format</li>
+<li><code>Orig -&gt; SVG</code> Create object in whatever tool and export to SVG</li>
+<li><code>SVG  -&gt; PS</code> Use <code>rsvg-convert</code> to convert from SVG to PostScript</li>
+<li><code>PS   -&gt; GP</code> Use <code>pstoedit</code> to convert to "gnuplot" polygon format</li>
 <li><code>GP   -&gt; GCode</code> Order the polygons properly, removing duplicate boundaries and convert to GCode using <code>clipcli</code>, convert from GNUPlot format to GCode using <code>gp2ngc</code> and then rescale using other cli GCode tools.</li>
 </ul>
 <h2 id="installation">Installation</h2>
@@ -78,127 +76,126 @@ to "GNUPlot format" then converts to GCocde.</p>
 <h2 id="conversion">Conversion</h2>
 <p>Though this is pretty hodge-podge, there are a few things to consider:</p>
 <ul>
-<li><code>pstoedit</code> loses units when converting to <code>RS274</code> GCode.  I believe this only considers PostScript with "pixel" units, regardless of original units, then converts a pixel to 1/72 inches.  A post scale has to be done if using <code>pstoedit</code> to rescale to the appropriate units</li>
-<li>Even if <code>pstoedit</code> is used, this creates a problem when trying to cut out shapes in the correct order.  <code>clipcli</code> has an option to print out polygons in 'tree' order which should print the inner polygons first.</li>
+<li><code>pstoedit</code> loses units when converting to <code>RS274</code> GCode. I believe this only considers PostScript with "pixel" units, regardless of original units, then converts a pixel to 1/72 inches. A post scale has to be done if using <code>pstoedit</code> to rescale to the appropriate units</li>
+<li>Even if <code>pstoedit</code> is used, this creates a problem when trying to cut out shapes in the correct order. <code>clipcli</code> has an option to print out polygons in 'tree' order which should print the inner polygons first.</li>
 <li>I'll be using some of the tools that I've created below to rescale/etc. but in theory anything could be used, including (maybe the more standard and robust?) <code>grecode</code> as linked above.</li>
 </ul>
 <p>The following is an example script to convert an input SVG file into GCode:</p>
-<pre><code class="language-bash">inpsvg=&quot;$1&quot;
-sf=`echo '72/25.4' | bc -l`
-premul=`echo 1000000 | bc -l`
-invmul=`echo &quot;1/$premul&quot; | bc -l`
-
-frapid=&quot;&quot;
-fslow=&quot;F800&quot;
-S=&quot;1.0&quot;
-
-if [[ &quot;$inpsvg&quot; == &quot;&quot; ]] ; then
-  echo &quot;provide input svg&quot;
-  exit 1
-fi
-
-rawtype=`file $inpsvg`
-checktype=`file -b $inpsvg | cut -f1 -d' '`
-if [[ &quot;$checktype&quot; != &quot;SVG&quot; ]] ; then
-  echo -e &quot;file $inpsvg is of type:\n\n$rawtype\n\nNnot an SVG file? Exiting.\n&quot;
-  exit 1
-fi
-
-bn=`basename $inpsvg .svg`
-
-# causes duplicate paths otherwise
-#
-sed -i 's/fill=&quot;[^&quot;]*&quot;/fill=&quot;none&quot;/g' $inpsvg
-
-echo &quot;creating $bn.ps&quot;
-rsvg-convert -f ps -o $bn.ps $inpsvg
-
-pstoedit -f gnuplot $bn.ps $bn.gp
-clipcli -s $bn.gp -F -x $premul -T &gt; ${bn}-ord.gp
-
-sfx_slow=&quot;$frapid S$S&quot;
-sfx_rapid=&quot;$fslow S0&quot;
-
-echo gp2ngc -i ${bn}-ord.gp -s &quot;$invmul&quot; --sfx-rapid &quot;$sfx_rapid&quot; --sfx-slow &quot;$sfx_slow&quot; -o ${bn}.ngc
-gp2ngc -i ${bn}-ord.gp --sfx-rapid &quot;$sfx_rapid&quot; --sfx-slow &quot;$sfx_slow&quot; | ngc_scale -s &quot;$invmul&quot; &gt; ${bn}.ngc
-</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="va">inpsvg=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="va">sf=</span><span class="kw">`</span><span class="bu">echo</span> <span class="st">&#39;72/25.4&#39;</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="kw">`</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="va">premul=</span><span class="kw">`</span><span class="bu">echo</span> 1000000 <span class="kw">|</span> <span class="fu">bc</span> -l<span class="kw">`</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="va">invmul=</span><span class="kw">`</span><span class="bu">echo</span> <span class="st">&quot;1/</span><span class="va">$premul</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="kw">`</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="va">frapid=</span><span class="st">&quot;&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="va">fslow=</span><span class="st">&quot;F800&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a><span class="va">S=</span><span class="st">&quot;1.0&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a><span class="kw">if [[</span> <span class="st">&quot;</span><span class="va">$inpsvg</span><span class="st">&quot;</span> <span class="ot">==</span> <span class="st">&quot;&quot;</span><span class="kw"> ]]</span> ; <span class="kw">then</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>  <span class="bu">echo</span> <span class="st">&quot;provide input svg&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a><span class="kw">fi</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a><span class="va">rawtype=</span><span class="kw">`</span><span class="fu">file</span> <span class="va">$inpsvg</span><span class="kw">`</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a><span class="va">checktype=</span><span class="kw">`</span><span class="fu">file</span> -b <span class="va">$inpsvg</span> <span class="kw">|</span> <span class="fu">cut</span> -f1 -d<span class="st">&#39; &#39;</span><span class="kw">`</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a><span class="kw">if [[</span> <span class="st">&quot;</span><span class="va">$checktype</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;SVG&quot;</span><span class="kw"> ]]</span> ; <span class="kw">then</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a>  <span class="bu">echo</span> -e <span class="st">&quot;file </span><span class="va">$inpsvg</span><span class="st"> is of type:\n\n</span><span class="va">$rawtype</span><span class="st">\n\nNnot an SVG file? Exiting.\n&quot;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="kw">fi</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a><span class="va">bn=</span><span class="kw">`</span><span class="fu">basename</span> <span class="va">$inpsvg</span> .svg<span class="kw">`</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a><span class="co"># causes duplicate paths otherwise</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a><span class="fu">sed</span> -i <span class="st">&#39;s/fill=&quot;[^&quot;]*&quot;/fill=&quot;none&quot;/g&#39;</span> <span class="va">$inpsvg</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;creating </span><span class="va">$bn</span><span class="st">.ps&quot;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a><span class="ex">rsvg-convert</span> -f ps -o <span class="va">$bn</span>.ps <span class="va">$inpsvg</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a><span class="ex">pstoedit</span> -f gnuplot <span class="va">$bn</span>.ps <span class="va">$bn</span>.gp</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a><span class="ex">clipcli</span> -s <span class="va">$bn</span>.gp -F -x <span class="va">$premul</span> -T <span class="op">&gt;</span> <span class="va">${bn}</span>-ord.gp</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true"></a><span class="va">sfx_slow=</span><span class="st">&quot;</span><span class="va">$frapid</span><span class="st"> S</span><span class="va">$S</span><span class="st">&quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true"></a><span class="va">sfx_rapid=</span><span class="st">&quot;</span><span class="va">$fslow</span><span class="st"> S0&quot;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true"></a><span class="bu">echo</span> gp2ngc -i <span class="va">${bn}</span>-ord.gp -s <span class="st">&quot;</span><span class="va">$invmul</span><span class="st">&quot;</span> --sfx-rapid <span class="st">&quot;</span><span class="va">$sfx_rapid</span><span class="st">&quot;</span> --sfx-slow <span class="st">&quot;</span><span class="va">$sfx_slow</span><span class="st">&quot;</span> -o <span class="va">${bn}</span>.ngc</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true"></a><span class="ex">gp2ngc</span> -i <span class="va">${bn}</span>-ord.gp --sfx-rapid <span class="st">&quot;</span><span class="va">$sfx_rapid</span><span class="st">&quot;</span> --sfx-slow <span class="st">&quot;</span><span class="va">$sfx_slow</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">ngc_scale</span> -s <span class="st">&quot;</span><span class="va">$invmul</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="va">${bn}</span>.ngc</span></code></pre></div>
 <h2 id="misc">Misc.</h2>
-<p>In theory, <code>pstoedit</code> can be used to create GCode but <code>pstoedit</code> converts to the <code>RS274</code> standard.  Among other things, the <code>RS274</code> includes variables so a substitution step needs to be involved in order to "normalize" to something that other GCode interpreters can understand (for example, the smoothieboard or grbl).</p>
-<p>There's still the problem of polygon ordering but assuming that's not an issue, the following is a "hacky" script does the substitution  (no nested expressions, no non-trivial functions, run at your own risk):</p>
-<pre><code class="language-python">#!/usr/bin/python
-#
-# regexp substitution of variables.
-# Uses Python's &quot;eval&quot; to evaluate interior
-# after variable substitution.
-#
-# AGPLv3 license
-#
-import sys
-import re
-
-var_map = {}
-
-# variable decleration
-#
-var_decl_pat = re.compile( r'\s*#(\d+)\s*=\s*([^\s]+)\s*(\([^\)]*\))?\s*$' )
-
-# not [], [], not []
-#
-expr_pat = re.compile( r'([^\[]*)\[([^\]]*)\]([^\[]*)' )
-
-# not #*, #\d+, not #*
-#
-var_sub_pat = re.compile( r'([^#]*)(#\d+)([^#]*)' )
-
-# consider comments separately to avoid matching '#' and
-# other special characters
-#
-comment_pat = re.compile( r'\([^\)]*\)' )
-
-line_no = 0
-for line in sys.stdin:
-  line_no += 1
-
-  line = line.rstrip()
-  comments = &quot;&quot;
-  for (comment) in re.findall(comment_pat, line):
-    comments = comments + comment
-
-  line = re.sub(comment_pat, '', line)
-  m = re.match(var_decl_pat, line)
-  if m:
-    var_map[ &quot;#&quot; + str(m.group(1)) ] = str(m.group(2))
-    continue
-
-  varsub_line = &quot;&quot;
-  for (pfx, var_subs, sfx) in re.findall(var_sub_pat, line):
-    if var_subs in var_map:
-      pass
-    else:
-      print &quot; ERROR on line&quot;, line_no, &quot;, no variable mapping for&quot;, var_subs
-      sys.exit(1)
-      continue
-
-    varsub_line += pfx
-    varsub_line += var_map[var_subs]
-    varsub_line += sfx
-
-  if varsub_line == &quot;&quot;:
-    varsub_line = line
-
-  xpr_match = re.search(expr_pat, varsub_line)
-  if not xpr_match:
-    print varsub_line + comments
-    continue
-
-  cur_line = &quot;&quot;
-  for (pfx, xpr, sfx) in re.findall(expr_pat, varsub_line):
-    xpr_val = eval(xpr)
-    cur_line += pfx + str(xpr_val) + sfx
-
-  print cur_line +  comments
-</code></pre>
+<p>In theory, <code>pstoedit</code> can be used to create GCode but <code>pstoedit</code> converts to the <code>RS274</code> standard. Among other things, the <code>RS274</code> includes variables so a substitution step needs to be involved in order to "normalize" to something that other GCode interpreters can understand (for example, the smoothieboard or grbl).</p>
+<p>There's still the problem of polygon ordering but assuming that's not an issue, the following is a "hacky" script does the substitution (no nested expressions, no non-trivial functions, run at your own risk):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co">#!/usr/bin/python</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="co"># regexp substitution of variables.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="co"># Uses Python&#39;s &quot;eval&quot; to evaluate interior</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="co"># after variable substitution.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="co"># AGPLv3 license</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="im">import</span> sys</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="im">import</span> re</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>var_map <span class="op">=</span> {}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a><span class="co"># variable decleration</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>var_decl_pat <span class="op">=</span> re.<span class="bu">compile</span>( <span class="vs">r&#39;\s*#(\d+)\s*=\s*([^\s]+)\s*(\([^\)]*\))?\s*$&#39;</span> )</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true"></a><span class="co"># not [], [], not []</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true"></a>expr_pat <span class="op">=</span> re.<span class="bu">compile</span>( <span class="vs">r&#39;([^\[]*)\[([^\]]*)\]([^\[]*)&#39;</span> )</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true"></a><span class="co"># not #*, #\d+, not #*</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true"></a>var_sub_pat <span class="op">=</span> re.<span class="bu">compile</span>( <span class="vs">r&#39;([^#]*)(#\d+)([^#]*)&#39;</span> )</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true"></a><span class="co"># consider comments separately to avoid matching &#39;#&#39; and</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true"></a><span class="co"># other special characters</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true"></a>comment_pat <span class="op">=</span> re.<span class="bu">compile</span>( <span class="vs">r&#39;\([^\)]*\)&#39;</span> )</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true"></a>line_no <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true"></a><span class="cf">for</span> line <span class="kw">in</span> sys.stdin:</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true"></a>  line_no <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true"></a>  line <span class="op">=</span> line.rstrip()</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true"></a>  comments <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true"></a>  <span class="cf">for</span> (comment) <span class="kw">in</span> re.findall(comment_pat, line):</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true"></a>    comments <span class="op">=</span> comments <span class="op">+</span> comment</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true"></a>  line <span class="op">=</span> re.sub(comment_pat, <span class="st">&#39;&#39;</span>, line)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true"></a>  m <span class="op">=</span> re.match(var_decl_pat, line)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true"></a>  <span class="cf">if</span> m:</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true"></a>    var_map[ <span class="st">&quot;#&quot;</span> <span class="op">+</span> <span class="bu">str</span>(m.group(<span class="dv">1</span>)) ] <span class="op">=</span> <span class="bu">str</span>(m.group(<span class="dv">2</span>))</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true"></a>    <span class="cf">continue</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true"></a>  varsub_line <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true"></a>  <span class="cf">for</span> (pfx, var_subs, sfx) <span class="kw">in</span> re.findall(var_sub_pat, line):</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true"></a>    <span class="cf">if</span> var_subs <span class="kw">in</span> var_map:</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true"></a>      <span class="cf">pass</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true"></a>      <span class="bu">print</span> <span class="st">&quot; ERROR on line&quot;</span>, line_no, <span class="st">&quot;, no variable mapping for&quot;</span>, var_subs</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true"></a>      sys.exit(<span class="dv">1</span>)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true"></a>      <span class="cf">continue</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true"></a>    varsub_line <span class="op">+=</span> pfx</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true"></a>    varsub_line <span class="op">+=</span> var_map[var_subs]</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true"></a>    varsub_line <span class="op">+=</span> sfx</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true"></a>  <span class="cf">if</span> varsub_line <span class="op">==</span> <span class="st">&quot;&quot;</span>:</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true"></a>    varsub_line <span class="op">=</span> line</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true"></a>    </span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true"></a>  xpr_match <span class="op">=</span> re.search(expr_pat, varsub_line)</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true"></a>  <span class="cf">if</span> <span class="kw">not</span> xpr_match:</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true"></a>    <span class="bu">print</span> varsub_line <span class="op">+</span> comments</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true"></a>    <span class="cf">continue</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true"></a>  </span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true"></a>  cur_line <span class="op">=</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true"></a>  <span class="cf">for</span> (pfx, xpr, sfx) <span class="kw">in</span> re.findall(expr_pat, varsub_line):</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true"></a>    xpr_val <span class="op">=</span> <span class="bu">eval</span>(xpr)</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true"></a>    cur_line <span class="op">+=</span> pfx <span class="op">+</span> <span class="bu">str</span>(xpr_val) <span class="op">+</span> sfx</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true"></a>  <span class="bu">print</span> cur_line <span class="op">+</span>  comments</span></code></pre></div>
 <h6 id="2016-09-19">2016-09-19</h6>
+
 
       </section>
 
@@ -209,6 +206,6 @@ for line in sys.stdin:
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

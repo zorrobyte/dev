@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -52,14 +52,9 @@
       <section>
 
         <h1 id="enabling-https-using-lets-encrypt">Enabling HTTPS Using Let's Encrypt</h1>
-<p><a href="https://letsencrypt.org/">Let's Encrypt</a> is a certificate authority that
-gives out digital certificates to the community free of charge.</p>
-<p>Using thir <a href="https://letsencrypt.org/getting-started/">"shell access"</a> method,
-one can install a program called <a href="https://certbot.eff.org/">certbot</a> that
-gives quick start instructions for installing and running certbot to
-issue a certificate for your host and system.</p>
-<p>Detailed below is what I did for some of my servers (HAProxy on Ubuntu and
-Apache on Ubuntu).</p>
+<p><a href="https://letsencrypt.org/">Let's Encrypt</a> is a certificate authority that gives out digital certificates to the community free of charge.</p>
+<p>Using thir <a href="https://letsencrypt.org/getting-started/">"shell access"</a> method, one can install a program called <a href="https://certbot.eff.org/">certbot</a> that gives quick start instructions for installing and running certbot to issue a certificate for your host and system.</p>
+<p>Detailed below is what I did for some of my servers (HAProxy on Ubuntu and Apache on Ubuntu).</p>
 <h2 id="haproxy-on-ubuntu">HAProxy on Ubuntu</h2>
 <pre><code>sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:certbot/certbot
@@ -83,11 +78,11 @@ sudo apt-get install python-certbot-apache
 <h2 id="notes">Notes</h2>
 <ul>
 <li>Make sure to add the extra domain so that both <code>www.domain.com</code> and <code>domain.com</code> work.</li>
-<li>If you've already issued a certificate and want to add a domain like I needed to for <code>www.mechalephant.com</code>, adding the domain <code>mechaelephant.com</code> because
-  I forgot the non <code>www</code> prefixed web page, then I think the <code>--expand</code> flag will work to add an additional domain.</li>
+<li>If you've already issued a certificate and want to add a domain like I needed to for <code>www.mechalephant.com</code>, adding the domain <code>mechaelephant.com</code> because I forgot the non <code>www</code> prefixed web page, then I think the <code>--expand</code> flag will work to add an additional domain.</li>
 <li>I'm still not sure how to renew or automatically renew the certs...</li>
 </ul>
 <h6 id="2017-06-12">2017-06-12</h6>
+
 
       </section>
 
@@ -98,6 +93,6 @@ sudo apt-get install python-certbot-apache
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>

@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>dev blog</title>
 
-    <link rel="stylesheet" href="/dev/css/styles.css">
-    <link rel="stylesheet" href="/dev/css/pygment_trac.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pygment_trac.css">
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -15,10 +15,10 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
       });
     </script>
-    <script type="text/javascript" src="/dev/js/MathJax.js"></script>
-    <!-- <script type="text/javascript" src="/dev/js/MathJax.js?config=TeX-AMS_HTML""></script> -->
+    <script type="text/javascript" src="js/MathJax.js"></script>
+    <!-- <script type="text/javascript" src="{{config.extra.base}}js/MathJax.js?config=TeX-AMS_HTML""></script> -->
 
-    <script type="text/javascript" src="/dev/js/audience-minutes.js"></script>
+    <script type="text/javascript" src="js/audience-minutes.js"></script>
 
     <meta name="viewport" content="width=device-width">
   </head>
@@ -30,7 +30,7 @@
 
         <table>
           <body>
-            <tr><td><a href="/dev/">./dev</a></td></tr>
+            <tr><td><a href="./">./dev</a></td></tr>
            <tr>
               <td>
                 <br /> <br /> <br />
@@ -41,7 +41,7 @@
                 Where applicable, all content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA</a>.
                 <br />
 
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/dev/img/cc-by-sa-80x15.png" /></a>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="img/cc-by-sa-80x15.png" /></a>
                 </p>
               </td>
             </tr>
@@ -52,39 +52,19 @@
       <section>
 
         <h2 id="kelly-criterion">Kelly Criterion</h2>
-<p>The Wikipedia article on the <a href="https://en.wikipedia.org/wiki/Kelly_criterion">Kelly criterion</a> might
-say more, but here is a simple derivation.</p>
-<p>Assuming you have a coin with probability $p$ of coming up heads and odds of $b:1$, the Kelly
-criterion states:</p>
-<p>$$
-f^* = \frac{bp-q}{b}
-$$</p>
+<p>The Wikipedia article on the <a href="https://en.wikipedia.org/wiki/Kelly_criterion">Kelly criterion</a> might say more, but here is a simple derivation.</p>
+<p>Assuming you have a coin with probability $p$ of coming up heads and odds of $b:1$, the Kelly criterion states:</p>
+<p>$$ f^* = \frac{bp-q}{b} $$</p>
 <p>Where $f^*$ is the fraction of your money pot the Kelly criterion tells you to bet and $q=1-p$.</p>
 <p>That is:</p>
-<p>$$
-f^* = \frac{bp-(1-p)}{b} \
-    = \frac{p(b+1)-1}{b}
-$$</p>
-<p>Assuming the strategy is to bet a fraction of your bank roll every round, with $W_0$ as the initial
-bank roll, $n$ time units and $W_n$ as your winnings at time $n$:</p>
-<p>$$
-W_n = (1 + br)^{pn} (1 - r)^{(1-p)n} W_0
-$$</p>
+<p>$$ f^* = \frac{bp-(1-p)}{b} <br />
+= \frac{p(b+1)-1}{b} $$</p>
+<p>Assuming the strategy is to bet a fraction of your bank roll every round, with $W_0$ as the initial bank roll, $n$ time units and $W_n$ as your winnings at time $n$:</p>
+<p>$$ W_n = (1 + br)^{pn} (1 - r)^{(1-p)n} W_0 $$</p>
 <p>Taking logarithms, setting the derivative with respect to $r$ and solving:</p>
-<p>$$
-\begin{array}
-.   &amp; \frac{d}{dr} \ln(W_n) &amp;= \frac{d}{dr} ( pn \ln(1+br) + (1-p)n \ln(1-r) + \ln(W_0) ) \\
-\to &amp; 0                   &amp;= \frac{pnb}{1+br} - \frac{(1-p)n}{1-r} \\
-\to &amp; \frac{(1-p)n}{1-r}  &amp;= \frac{pnb}{1+br} \\
-\to &amp; \frac{1-p}{1-r}     &amp;= \frac{pb}{1+br} \\
-\to &amp; (1-p) (1+br)        &amp;= pb (1-r) \\
-\to &amp; 1 - p + br - pbr  &amp;= pb - pbr \\
-\to &amp; 1 - p + br        &amp;= pb \\
-\to &amp; r                 &amp;= \frac{pb + p - 1}{b} \\
-\to &amp; r                 &amp;= \frac{b(p + 1) - 1}{b} \\
-\end{array}
-$$</p>
+<p>$$ \begin{array} . &amp; \frac{d}{dr} \ln(W_n) &amp;= \frac{d}{dr} ( pn \ln(1+br) + (1-p)n \ln(1-r) + \ln(W_0) ) \\ \to &amp; 0 &amp;= \frac{pnb}{1+br} - \frac{(1-p)n}{1-r} \\ \to &amp; \frac{(1-p)n}{1-r} &amp;= \frac{pnb}{1+br} \\ \to &amp; \frac{1-p}{1-r} &amp;= \frac{pb}{1+br} \\ \to &amp; (1-p) (1+br) &amp;= pb (1-r) \\ \to &amp; 1 - p + br - pbr &amp;= pb - pbr \\ \to &amp; 1 - p + br &amp;= pb \\ \to &amp; r &amp;= \frac{pb + p - 1}{b} \\ \to &amp; r &amp;= \frac{b(p + 1) - 1}{b} \\ \end{array} $$</p>
 <h6 id="2017-08-18">2017-08-18</h6>
+
 
       </section>
 
@@ -95,6 +75,6 @@ $$</p>
       -->
 
     </div>
-    <script src="/dev/js/scale.fix.js"></script>
+    <script src="js/scale.fix.js"></script>
   </body
 </html>
