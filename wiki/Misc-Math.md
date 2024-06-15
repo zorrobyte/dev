@@ -71,7 +71,8 @@ Choose $v > 1$ and we have the second sum as non-integral, contradicting the ass
 Balls and Urns
 ---
 
-Balls and urns counting (from [src](https://www.johndcook.com//TwelvefoldWay.pdf)):
+Balls and urns counting (from [src](https://www.johndcook.com//TwelvefoldWay.pdf)).
+The number of configurations for each type of scenario is:
 
 | Balls | Urns | unrestricted | max(1) | min(1) |
 |-------|------|--------------|--------|--------|
@@ -84,8 +85,8 @@ Balls and urns counting (from [src](https://www.johndcook.com//TwelvefoldWay.pdf
 * `u` = unlabelled
 * $b$ - balls
 * $u$ - urns
-* `max(1)` - chance maximum balls in urns does not exceed 1
-* `min(1)` - chance all urns have at least 1 ball
+* `max(1)` - maximum balls in all urns does not exceed 1
+* `min(1)` - all urns have at least 1 ball
 * $(u)\_b = {\prod}_{k=0}^{b-1} (u-k)$
 * ${ b \brace u}$ - Stirling's number of the second kind ( ${ n \brace k } = S(n,k) = k S(n-1,k) + S(n-1,k-1)$ )
 * $\left({u \choose b }\right) = { u + b - 1 \choose b }$, "with replacement"
