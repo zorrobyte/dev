@@ -12,7 +12,7 @@ Scientific Paper Notes
 
 ### Ernst notes
 
-Micael Ernst ["How to write a technical paper or a research paper"](https://homes.cs.washington.edu/~mernst/advice/write-technical-paper.html).
+Michael Ernst ["How to write a technical paper or a research paper"](https://homes.cs.washington.edu/~mernst/advice/write-technical-paper.html).
 
 * Purpose of science is to communicate ideas and to share knowledge, not just to discover it
 * know your message, stay on message
@@ -22,7 +22,7 @@ Micael Ernst ["How to write a technical paper or a research paper"](https://home
   - knowing reader determines points of interest
   - what it is and why it works
 * details
-  - communciate specific ideas
+  - communicate specific ideas
   - cut out irrelevant detail
   - communicate what would be most interesting to reader, not yourself
   - do not weight prose by time and effort spent, communicate the relevant successes
@@ -35,11 +35,11 @@ Micael Ernst ["How to write a technical paper or a research paper"](https://home
   - state point first, then support it
   - consider giving mini-introductions about organization
     + whole paper 1 paragraph
-    + section 1 setence
+    + section 1 sentence
   - writing abstract and intro first helps with paper writing and organization
-  - writing rest of paper first helps writing abstrant and intro later
+  - writing rest of paper first helps writing abstract and intro later
   - writing abstract and intro first will most likely be less effort to write paper
-    as abstrant and intro are shorter and provide roadmap for paper
+    as abstract and intro are shorter and provide road map for paper
   - provide what task is, or what goal is, as motivation for technical details
 * getting started
   - talk it out
@@ -59,7 +59,7 @@ Micael Ernst ["How to write a technical paper or a research paper"](https://home
   - first person should be rarely used
   - do not use 'we' to mean reader and author
   - do not use 'we' to describe execution of program or idea ("we compute a graph" - no)
-  - do not anthropomorphise programs
+  - do not anthropomorphize programs
   - avoid adjectives
   - don't overuse 'novel'
   - do not use 'clearly', 'easily', 'obviously', 'trivial'
@@ -68,13 +68,13 @@ Micael Ernst ["How to write a technical paper or a research paper"](https://home
   - describing paper itself, use present tense
   - avoid gratuitous use of future tense ("switching wires will cause an error" -> "switching wires causes an error")
   - use redundant commas ("milk, cheese and crackers" -> "milk, cheese, and crackers")
-  - english has compound adjectives but not nouns
-  - avoid ambious words. (as, since -> because) (whether -> if)
-  - avoid quotation, paraphrasings usually suffice
+  - English has compound adjectives but not nouns
+  - avoid ambiguous words. (as, since -> because) (whether -> if)
+  - avoid quotation, paraphrasing usually suffice
 * figures
   - example figures help clarify ideas
   - figures should stand on their own
-  - use consistent pictoral elements, with only two different types of arrows (boxes, shading, etc.)
+  - use consistent pictorial elements, with only two different types of arrows (boxes, shading, etc.)
   - use a legend if more than two types of style elements
   - all graphs, diagrams, screenshots, etc. should be named figures
   - put figures at top of page
@@ -130,7 +130,7 @@ Derek Dreyer ["How to Write Papers So People Can Read Them"](https://www.youtube
 * intro
   - expanded version of abstract
 * main idea
-  - concreate illustrative examples
+  - concrete illustrative examples
   - do not show general solution
 * related work
   - goes at end
@@ -155,7 +155,7 @@ Simon Peyton Jones ["How to write a great research paper"](https://www.youtube.c
 * identify your key idea
   - convey useful and re-usable idea
   - you don't need a fantastic idea before you can write a paper
-  - your paper should have on clear, sharp idea
+  - your paper should have one clear, sharp idea
   - lots of ideas should be lots of papers
   - do not leave the reader in doubt of what your idea is, be explicit
 * conference paper structure
@@ -174,11 +174,11 @@ Simon Peyton Jones ["How to write a great research paper"](https://www.youtube.c
   - one page
 * molehills not mountains
 * contributions
-  - write list of contributsion first
+  - write list of contribution first
   - contributions drive paper
   - allows reader to determine if rest of paper is worth reading
   - don't leave the reader to guess what contributions are
-  - good methodology is to put bullet points of concreate contributions
+  - good methodology is to put bullet points of concrete contributions
 * don't give what you will do in forward sections, give forward references
   to sections after making claims ("in section 2 we will show ...", "show show that ... (section 2)")
 * related work should go at the end
@@ -189,7 +189,7 @@ Simon Peyton Jones ["How to write a great research paper"](https://www.youtube.c
 * acknowledge weakness in your approach
   - on the path to the idea (intro), you can mention what your focus is while acknowledging
     what the focus is not (what its not good at) and forward reference to related work
-    ("axe is good for cutting trees but not vegetables, we focus on cutting trees and mention
+    ("ax is good for cutting trees but not vegetables, we focus on cutting trees and mention
     vegetables in related works")
 * present ideas and convey intuition
   - give examples then present general case
