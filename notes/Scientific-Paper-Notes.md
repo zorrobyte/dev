@@ -194,3 +194,21 @@ Simon Peyton Jones ["How to write a great research paper"](https://www.youtube.c
 * present ideas and convey intuition
   - give examples then present general case
 
+### Pattersons writing advice
+
+["Dave Patterson's Writing Advice"](https://people.eecs.berkeley.edu/~pattrsn/talks/writingtips.html).
+
+* active voice ("as shown in fig x" -> "fig x shows")
+* eliminate "this" ambiguities ("this" -> "this is ...", "this <noun> ...")
+* "while" should only refer to time ("while" -> "although")
+* single numbered sections are superfluous
+* capitalize chapter, figure and table references ("Figure 1", "Chapter 3")
+* % for percentages, $ for dollars
+* spell out one to ten, numerals for 11 and up
+  - exception when arithmetic is involved ("8 core, 4 computer -> 32 processors")
+* INSPEC
+
+References
+---
+
+* SIGPLAN [Author Information](https://www.sigplan.org/Resources/Author/)
