@@ -99,7 +99,7 @@ Micael Ernst ["How to write a technical paper or a research paper"](https://home
 * feedback
   - get feedback
 * submission
-  - err on submitting to late than too early
+  - err on submitting too late than too early
   - rule of thumb is to submit if you're proud of paper in current form
   - don't submit if it's known that reviewers will have significant criticisms
   
