@@ -40,6 +40,12 @@ Note: "The Losers are not social losers (as in the opposite of “cool”), but 
 
 ([source](https://www.netlingo.com/word/gilders-law.php), [archive](https://web.archive.org/web/20211011053307/https://www.netlingo.com/word/gilders-law.php))
 
+### Jevon's Paradox
+
+> An increase in resource usage efficiency can lead to an increase in resource demand.
+
+[Wikipedia](https://en.wikipedia.org/wiki/Jevons_paradox)
+
 ### Koomey's Law
 
 > The number of computations per joule of energy dissipated doubled about every 1.57 years.

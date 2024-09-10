@@ -77,4 +77,18 @@ Shouldn't do for every song
 
 ---
 
+[6 key concepts for arranging techno](https://www.youtube.com/watch?v=JHiTUBVLmFI)
 
+
+* arrange composition into about 10 16 bar segments
+  - 16 bars is about 0.5 mins, so approx. 5 mins track
+  - each 16 bars, change something to keep dynamism
+* Shifting gears in high percussion
+  - cycle through different options for high hats and other drums
+  - each drum can have its own effect interpolate from the start of the phrase
+    to the end to help give more power to transition
+* Focus on contrast
+* Markers and reverses
+* Calls, responses and polymeters
+* scoop-up and minimalism moments
+* peforming and recording
