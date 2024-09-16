@@ -326,7 +326,7 @@ BP has no concept of "self avoiding walk" (SAW) and the fact that these are SAWs
 of interpretation we impose after the fact.
 The SAWs are embedded in the tiles present in the grid and the admissible tile pairs from the
 $f(\cdot)$ function.
-For convenience, we might talk about the SAW as a convenience with the understanding that the
+We might talk about the SAW, as a convenience, with the understanding that the
 SAW itself is not present as a concept in BP.
 
 One observation is that if the endpoints are too far apart, the SAW meanders from one of it's initial
